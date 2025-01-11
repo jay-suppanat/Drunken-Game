@@ -11,7 +11,7 @@ import SwiftUI
 struct DrunkenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarContentView()
         }
     }
 }
