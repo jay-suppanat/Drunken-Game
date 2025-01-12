@@ -6,5 +6,7 @@
 //
 
 enum Constants {
-    
+    enum Title {
+        static let setting = "Setting"
+    }
 }
