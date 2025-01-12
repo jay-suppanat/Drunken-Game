@@ -11,7 +11,6 @@ struct TabBarContentView: View {
     @State private var tabBarSelection: Int = 0
 
     var body: some View {
-
         TabView(selection: $tabBarSelection) {
             DoraemonGameContentView()
                 .tabItem {
@@ -27,6 +26,7 @@ struct TabBarContentView: View {
                 }
                 .tag(2)
         }
+        .tint(ThemeManager.Colors.black)
     }
 }
 

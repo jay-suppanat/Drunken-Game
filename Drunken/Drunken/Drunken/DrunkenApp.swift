@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct DrunkenApp: App {
+    init() {
+        self.initTabBarAppearance()
+    }
+
     var body: some Scene {
         WindowGroup {
             TabBarContentView()
         }
+    }
+
+    private func initTabBarAppearance() {
+        let appearance = UITabBar.appearance()
+        appearance.tintColor = UIColor.systemRed
+        appearance.unselectedItemTintColor = UIColor.lightGray
     }
 }
