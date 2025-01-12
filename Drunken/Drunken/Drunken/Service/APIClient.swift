@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: APIClient
+
 class APIClient: ObservableObject {
     static let shared = APIClient()
 
@@ -23,6 +25,17 @@ class APIClient: ObservableObject {
             completion(data as! Result<T, any Error>)
         } catch {
             print("Failed to decode \(fileName).json: \(error.localizedDescription)")
+        }
+    }
+}
+
+// MARK: DrunkenService
+
+enum DrunkenService {
+    static func fetchSettingMenuList(completion: @escaping (Result<SettingMenuListModel, Error>) -> Void) {
+        APIClient.shared.fetchDataFromJSON(fileName: APIRouter.settingMenuList.jsonFile, response: SettingMenuListModel.self) { response in
+            print("📦 Fetch setting menu list success.")
+            completion(response)
         }
     }
 }
