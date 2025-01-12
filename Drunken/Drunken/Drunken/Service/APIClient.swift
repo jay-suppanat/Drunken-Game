@@ -21,10 +21,12 @@ class APIClient: ObservableObject {
         }
 
         do {
-            let data = try JSONDecoder().decode(T.self, from: try Data(contentsOf: jsonFile))
-            completion(data as! Result<T, any Error>)
+            let data = try Data(contentsOf: jsonFile)
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            completion(.success(decodedData))
         } catch {
-            print("Failed to decode \(fileName).json: \(error.localizedDescription)")
+            print("⚠️ Failed to decode \(fileName).json: \(error.localizedDescription)")
+            completion(.failure(error))
         }
     }
 }
@@ -34,8 +36,14 @@ class APIClient: ObservableObject {
 enum DrunkenService {
     static func fetchSettingMenuList(completion: @escaping (Result<SettingMenuListModel, Error>) -> Void) {
         APIClient.shared.fetchDataFromJSON(fileName: APIRouter.settingMenuList.jsonFile, response: SettingMenuListModel.self) { response in
-            print("📦 Fetch setting menu list success.")
-            completion(response)
+            switch response {
+                case .success(let data):
+                    print("📦 Fetch setting menu list success.")
+                    completion(.success(data))
+                case .failure(let error):
+                    print("⚠️ Fetch setting menu list failed: \(error.localizedDescription)")
+                    completion(.failure(error))
+            }
         }
     }
 }
