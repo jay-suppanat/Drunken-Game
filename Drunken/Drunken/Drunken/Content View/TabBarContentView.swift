@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct TabBarContentView: View {
+    @State private var tabBarSelection: Int = 0
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+        TabView(selection: $tabBarSelection) {
+            DoraemonGameContentView()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Game")
+                }
+                .tag(1)
+
+            SettingContentView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("Setting")
+                }
+                .tag(2)
+        }
     }
 }
 
