@@ -8,7 +8,7 @@
 import SwiftUI
 
 class APIClient: ObservableObject {
-    static let shared = DrunkenClient()
+    static let shared = APIClient()
 
     public func fetchData<T: Decodable>(response: T.Type, completion: @escaping (Result<T, Error>) -> Void) {}
 
