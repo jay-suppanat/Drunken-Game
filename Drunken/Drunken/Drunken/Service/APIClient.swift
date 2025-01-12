@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-class DrunkenClient: ObservableObject {
+class APIClient: ObservableObject {
+    static let shared = DrunkenClient()
+
     public func fetchData<T: Decodable>(response: T.Type, completion: @escaping (Result<T, Error>) -> Void) {}
 
     public func fetchDataFromJSON<T: Decodable>(fileName: String, response: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
