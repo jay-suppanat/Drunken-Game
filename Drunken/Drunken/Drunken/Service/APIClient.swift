@@ -14,36 +14,29 @@ class APIClient: ObservableObject {
 
     public func fetchData<T: Decodable>(response: T.Type, completion: @escaping (Result<T, Error>) -> Void) {}
 
-    public func fetchDataFromJSON<T: Decodable>(fileName: String, response: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        guard let jsonFile = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            print("⚠️ \(fileName).json is not found.")
-            return
+    public func fetchDataFromJSON<T: Decodable>(fileName: String, response: T.Type) -> T {
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else {
+            fatalError("Faliled to locate \(fileName) in bundle")
         }
 
-        do {
-            let data = try Data(contentsOf: jsonFile)
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
-            completion(.success(decodedData))
-        } catch {
-            print("⚠️ Failed to decode \(fileName).json: \(error.localizedDescription)")
-            completion(.failure(error))
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load file from \(fileName) from bundle")
         }
+
+        let decoder = JSONDecoder()
+
+        guard let loadedFile = try? decoder.decode(response, from: data) else {
+            fatalError("Failed to decode \(fileName) from bundle")
+        }
+
+        return loadedFile
     }
 }
 
 // MARK: DrunkenService
 
 enum DrunkenService {
-    static func fetchSettingMenuList(completion: @escaping (Result<SettingMenuListModel, Error>) -> Void) {
-        APIClient.shared.fetchDataFromJSON(fileName: APIRouter.settingMenuList.jsonFile, response: SettingMenuListModel.self) { response in
-            switch response {
-                case .success(let data):
-                    print("📦 Fetch setting menu list success.")
-                    completion(.success(data))
-                case .failure(let error):
-                    print("⚠️ Fetch setting menu list failed: \(error.localizedDescription)")
-                    completion(.failure(error))
-            }
-        }
+    static func fetchSettingMenuList(completion: @escaping (SettingMenuListModel) -> Void) {
+        completion(APIClient.shared.fetchDataFromJSON(fileName: APIRouter.settingMenuList.jsonFile, response: SettingMenuListModel.self))
     }
 }

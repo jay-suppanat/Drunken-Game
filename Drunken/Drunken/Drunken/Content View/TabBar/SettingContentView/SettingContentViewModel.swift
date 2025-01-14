@@ -5,20 +5,23 @@
 //  Created by Suppanat Chinthumrucks on 12/1/2568 BE.
 //
 
+import Combine
 import SwiftUI
 
 class SettingContentViewModel: ObservableObject {
     @Published var settingMenu: SettingMenuListModel = .init()
 
+    init() {
+        self.fetchSettingMenu()
+    }
+}
+
+// MARK: Service
+
+extension SettingContentViewModel: Service {
     public func fetchSettingMenu() {
         DrunkenService.fetchSettingMenuList { response in
-            switch response {
-                case .success(let data):
-                    print("📦 Fetch setting menu list success.")
-                    self.settingMenu = data
-                case .failure(let error):
-                    print("⚠️ Fetch setting menu list failed: \(error.localizedDescription)")
-            }
+            self.settingMenu = response
         }
     }
 }

@@ -9,23 +9,23 @@ import Foundation
 
 // MARK: - SettingMenuList
 struct SettingMenuListModel: Identifiable, Codable {
-    init(id: UUID = UUID()) {
-        self.id = id
+    let id: Int
+    let list: [SettingMenuElement]
+
+    init() {
+        self.id = 0
         self.list = .init()
     }
-
-    var id = UUID()
-    let list: [List]
 }
 
 // MARK: - List
-struct List: Identifiable, Codable {
-    init(id: UUID = UUID()) {
-        self.id = id
+struct SettingMenuElement: Identifiable, Codable {
+    let id: Int
+    let title, image: String
+
+    init() {
+        self.id = 0
         self.title = ""
         self.image = ""
     }
-
-    var id = UUID()
-    let title, image: String
 }

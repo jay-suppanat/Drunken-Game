@@ -1,12 +1,20 @@
 {
+    "id": 1,
     "list": [
         {
+            "id": 1,
             "title": "Edit Commands",
-            "image": ""
+            "image": "house.fill"
         },
         {
+            "id": 2,
             "title": "Remove Ads",
-            "image": ""
+            "image": "house.fill"
+        },
+        {
+            "id": 3,
+            "title": "About",
+            "image": "house.fill"
         }
     ]
 }
