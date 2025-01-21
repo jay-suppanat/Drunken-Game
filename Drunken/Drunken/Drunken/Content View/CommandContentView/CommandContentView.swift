@@ -13,9 +13,6 @@ struct CommandContentView: View {
 
     var body: some View {
         ZStack {
-            Color.backgroundColor
-                .ignoresSafeArea()
-
             VStack {
                 Spacer()
 

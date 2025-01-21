@@ -13,47 +13,54 @@ struct GameViewContentView: View {
     @State private var isShowCommand: Bool = false
 
     var body: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Spacer()
+        NavigationView {
+            VStack(spacing: 150) {
+                HStack {
+                    Spacer()
 
-                ZStack {
-                    Image(systemName: "pencil.circle.fill")
-                        .frame(height: 50)
+                    Button {} label: {
+                        NavigationLink {
+                            EditCommandContentView(viewModel: EditCommandViewModel())
+                        } label: {
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .frame(width: 45, height: 45)
+                                .tint(Color.blackColor)
+                        }
+                    }
                 }
-            }
+                .padding(.horizontal)
 
-            Spacer()
-
-            HStack {
-                ZStack {
-                    Image(AssetsManager.backCard.rawValue)
-                        .resizable()
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .frame(width: 200, height: 300)
-                        .aspectRatio(contentMode: .fill)
-                        .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
-                        .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
-
-                    Button {
-                        self.touchCardView()
-                    } label: {
+                HStack {
+                    ZStack {
                         Image(AssetsManager.backCard.rawValue)
                             .resizable()
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .frame(width: 200, height: 300)
                             .aspectRatio(contentMode: .fill)
+                            .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
+                            .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
+
+                        Button {
+                            self.touchCardView()
+                        } label: {
+                            Image(AssetsManager.backCard.rawValue)
+                                .resizable()
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .frame(width: 200, height: 300)
+                                .aspectRatio(contentMode: .fill)
+                        }
                     }
                 }
-            }
-            .fullScreenCover(isPresented: $isShowCommand, onDismiss: {
-                self.isOpen.toggle()
-            }, content: {
-                CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
-                                   isDismiss: $isShowCommand)
-            })
+                .fullScreenCover(isPresented: $isShowCommand, onDismiss: {
+                    self.isOpen.toggle()
+                }, content: {
+                    CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
+                                       isDismiss: $isShowCommand)
+                })
 
-            Spacer()
+                Spacer()
+            }
         }
     }
 
