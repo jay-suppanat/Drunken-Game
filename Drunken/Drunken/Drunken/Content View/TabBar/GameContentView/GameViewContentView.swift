@@ -9,7 +9,9 @@ import SwiftUI
 
 struct GameViewContentView: View {
     @State private var isOpen: Bool = false
-    @State private var showCard = CardDeckManager.shared.randomCard()
+    @State private var isShowCommand: Bool = false
+    @StateObject private var cardManager: CardDeckManager = CardDeckManager()
+
 
     var body: some View {
         VStack(spacing: 20) {
@@ -31,36 +33,39 @@ struct GameViewContentView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .frame(width: 200, height: 300)
                         .aspectRatio(contentMode: .fill)
-
+                        .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
+                        .animation(.easeInOut(duration: 0.5), value: self.isOpen)
 
                     Button {
                         self.touchCardView()
-                    } label: {}
+                    } label: {
+                        Image(AssetsManager.backCard.rawValue)
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .frame(width: 200, height: 300)
+                            .aspectRatio(contentMode: .fill)
+                    }
                 }
             }
+            .fullScreenCover(isPresented: $isShowCommand, content: {
+                CommandContentView(cardNumber: self.cardManager.card,
+                                   isDismiss: $isShowCommand)
+                    .presentationBackground(Color.white.opacity(0.3))
+            })
 
             Spacer()
         }
     }
 
     private func touchCardView() {
-        if self.isOpen {
-            // Show command alert
-        } else {
-            // Show random card alert
-        }
-
         self.isOpen.toggle()
-    }
+        self.cardManager.randomCard()
 
-    private func touchRandomButton() {
-        if self.isOpen {
-            // Show back card
-        } else {
-            // Show front card
+        // Delay equal to animation duration
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.isShowCommand.toggle()
+            self.isOpen.toggle()
         }
-
-        self.isOpen.toggle()
     }
 }
 

@@ -21,8 +21,11 @@ struct CardDeckModel {
 
 // MARK: CardDeckManager
 
-class CardDeckManager {
+class CardDeckManager: ObservableObject {
     static let shared = CardDeckManager()
+
+    @Published public var card: String = ""
+    @Published public var isGameEnd: Bool = false
 
     var cardDeck = CardDeckModel(cardDeck: [
         "2", "22", "222", "2222",
@@ -44,11 +47,11 @@ class CardDeckManager {
 // MARK: Logic
 
 extension CardDeckManager: Logic {
-    public func randomCard() -> String {
+    public func randomCard() {
         if self.cardDeck.kingCard.isEmpty {
-            return ""
+            self.isGameEnd = true
         } else {
-            guard let index = (0..<self.cardDeck.cardDeck.count).randomElement() else { return "Error Random Card" }
+            guard let index = (0..<self.cardDeck.cardDeck.count).randomElement() else { return }
             let randomCard = self.cardDeck.cardDeck[index]
 
             if self.cardDeck.kingCard.contains(randomCard) {
@@ -57,12 +60,22 @@ extension CardDeckManager: Logic {
 
             self.cardDeck.cardDeck.remove(at: index)
 
-            return randomCard
+            print("Random Card: \(randomCard)")
+            print("King Card: \(self.cardDeck.kingCard)")
+            print("Remain Card: \(self.cardDeck.cardDeck)")
+
+            self.isGameEnd = false
+            self.card = randomCard
         }
     }
 
     public func fillCard() {
         self.cardDeck.cardDeck = Constants.CardDeck.cards
         self.cardDeck.kingCard = Constants.CardDeck.kingCards
+
+        print("Fill Card Deck: \(self.cardDeck.cardDeck.count)")
+        print("Fill King Card: \(self.cardDeck.kingCard.count)")
+
+        self.isGameEnd = false
     }
 }
