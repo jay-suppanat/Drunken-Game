@@ -7,11 +7,7 @@
 
 import Foundation
 
-// MARK: CardDeckManager
-
 class CardDeckManager: ObservableObject {
-    static let shared = CardDeckManager()
-
     @Published public var card: String = ""
     @Published public var isGameEnd: Bool = false
 
