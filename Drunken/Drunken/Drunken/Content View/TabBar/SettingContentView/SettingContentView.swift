@@ -35,7 +35,7 @@ struct SettingCellView: View {
             Image(systemName: self.image)
 
             Text(self.title)
-                .foregroundStyle(self.id == 2 ? .red : .black)
+                .foregroundStyle(self.id == 1 ? .red : .black)
 
             Spacer()
         }

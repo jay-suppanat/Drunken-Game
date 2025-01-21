@@ -3,18 +3,13 @@
     "list": [
         {
             "id": 1,
-            "title": "Edit Commands",
-            "image": "house.fill"
+            "title": "Remove Ads",
+            "image": "cart.circle.fill"
         },
         {
             "id": 2,
-            "title": "Remove Ads",
-            "image": "house.fill"
-        },
-        {
-            "id": 3,
             "title": "About",
-            "image": "house.fill"
+            "image": "info.circle.fill"
         }
     ]
 }

@@ -12,19 +12,21 @@ struct TabBarContentView: View {
 
     var body: some View {
         TabView(selection: $tabBarSelection) {
-            DoraemonGameContentView()
+            GameViewContentView()
                 .tabItem {
                     Image(systemName: "house.fill")
+                        .symbolEffect(.bounce, isActive: self.tabBarSelection == 0)
                     Text("Game")
                 }
-                .tag(1)
+                .tag(0)
 
             SettingContentView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
+                        .symbolEffect(.bounce, isActive: self.tabBarSelection == 1)
                     Text("Setting")
                 }
-                .tag(2)
+                .tag(1)
         }
         .tint(ThemeManager.Colors.black)
     }
