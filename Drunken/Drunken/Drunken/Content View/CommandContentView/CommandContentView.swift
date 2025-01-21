@@ -13,15 +13,38 @@ struct CommandContentView: View {
 
     var body: some View {
         ZStack {
-            Text("Your Card: \(self.cardNumber)")
-                .foregroundStyle(Color.blue)
+            Color.backgroundColor
+                .ignoresSafeArea()
 
-            Rectangle()
-                .fill(Color.red)
-                .containerRelativeFrame([.vertical, .horizontal])
-                .onTapGesture {
+            VStack {
+                Spacer()
+
+                Button {
                     self.isDismiss = false
+                } label: {
+                    VStack {
+                        Image(self.cardNumber)
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .frame(width: 267, height: 400)
+                            .aspectRatio(contentMode: .fill)
+
+                        Text("Your Card: \(DrunkenUtil().getCardText(card: self.cardNumber))")
+                            .font(.system(size: 16, weight: .bold, design: .serif))
+
+                        VStack(spacing: 10) {
+                            Text("Description Punishment")
+                                .font(.system(size: 16, weight: .bold, design: .serif))
+
+                            Text(DrunkenUtil().getPunishment(card: self.cardNumber))
+                                .font(.system(size: 16, weight: .medium, design: .serif))
+                                .frame(alignment: .leading)
+                        }
+                    }
                 }
+
+                Spacer()
+            }
         }
     }
 }

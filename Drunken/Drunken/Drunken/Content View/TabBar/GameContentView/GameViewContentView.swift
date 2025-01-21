@@ -47,7 +47,9 @@ struct GameViewContentView: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $isShowCommand, content: {
+            .fullScreenCover(isPresented: $isShowCommand, onDismiss: {
+                self.isOpen.toggle()
+            }, content: {
                 CommandContentView(cardNumber: self.cardManager.card,
                                    isDismiss: $isShowCommand)
                     .presentationBackground(Color.white.opacity(0.3))
@@ -64,7 +66,6 @@ struct GameViewContentView: View {
         // Delay equal to animation duration
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.isShowCommand.toggle()
-            self.isOpen.toggle()
         }
     }
 }
