@@ -10,7 +10,7 @@ import SwiftUI
 struct GameViewContentView: View {
     @State private var isOpen: Bool = false
     @State private var isShowCommand: Bool = false
-    @StateObject private var cardManager: CardDeckManager = CardDeckManager()
+    @StateObject private var cardManager: GameContentViewModel = GameContentViewModel()
 
 
     var body: some View {
