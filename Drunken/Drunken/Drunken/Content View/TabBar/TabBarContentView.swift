@@ -27,7 +27,7 @@ struct TabBarContentView: View {
                 }
                 .tag(1)
         }
-        .tint(ThemeManager.Colors.black)
+        .tint(Color.blackColor)
     }
 }
 
