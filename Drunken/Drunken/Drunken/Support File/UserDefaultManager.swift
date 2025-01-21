@@ -28,121 +28,131 @@ class UserDefaultManager {
 
     // MARK: Get-Set Command 2
 
-    public func setCommand2Key(command: String) {
+    public func setCommand2(command: String) {
         UserDefaults.standard.set(command, forKey: self.command2Key)
     }
 
-    public func getCommand2Key() -> String {
+    public func getCommand2() -> String {
         return UserDefaults.standard.object(forKey: self.command2Key) as? String ?? Constants.Command.command2
     }
 
     // MARK: Get-Set Command 3
 
-    public func setCommand3Key(command: String) {
+    public func setCommand3(command: String) {
         UserDefaults.standard.set(command, forKey: self.command3Key)
     }
 
-    public func getCommand3Key() -> String {
+    public func getCommand3() -> String {
         return UserDefaults.standard.object(forKey: self.command3Key) as? String ?? Constants.Command.command3
     }
 
     // MARK: Get-Set Command 4
 
-    public func setCommand4Key(command: String) {
+    public func setCommand4(command: String) {
         UserDefaults.standard.set(command, forKey: self.command4Key)
     }
 
-    public func getCommand4Key() -> String {
+    public func getCommand4() -> String {
         return UserDefaults.standard.object(forKey: self.command4Key) as? String ?? Constants.Command.command4
     }
 
     // MARK: Get-Set Command 5
 
-    public func setCommand5Key(command: String) {
+    public func setCommand5(command: String) {
         UserDefaults.standard.set(command, forKey: self.command5Key)
     }
 
-    public func getCommand5Key() -> String {
+    public func getCommand5() -> String {
         return UserDefaults.standard.object(forKey: self.command5Key) as? String ?? Constants.Command.command5
     }
 
     // MARK: Get-Set Command 6
 
-    public func setCommand6Key(command: String) {
+    public func setCommand6(command: String) {
         UserDefaults.standard.set(command, forKey: self.command6Key)
     }
 
-    public func getCommand6Key() -> String {
+    public func getCommand6() -> String {
         return UserDefaults.standard.object(forKey: self.command6Key) as? String ?? Constants.Command.command6
     }
 
     // MARK: Get-Set Command 7
 
-    public func setCommand7Key(command: String) {
+    public func setCommand7(command: String) {
         UserDefaults.standard.set(command, forKey: self.command7Key)
     }
 
-    public func getCommand7Key() -> String {
+    public func getCommand7() -> String {
         return UserDefaults.standard.object(forKey: self.command7Key) as? String ?? Constants.Command.command7
     }
 
     // MARK: Get-Set Command 8
 
-    public func setCommand8Key(command: String) {
+    public func setCommand8(command: String) {
         UserDefaults.standard.set(command, forKey: self.command8Key)
     }
 
-    public func getCommand8Key() -> String {
+    public func getCommand8() -> String {
         return UserDefaults.standard.object(forKey: self.command8Key) as? String ?? Constants.Command.command8
     }
 
     // MARK: Get-Set Command 9
 
-    public func setCommand9Key(command: String) {
+    public func setCommand9(command: String) {
         UserDefaults.standard.set(command, forKey: self.command9Key)
     }
 
-    public func getCommand9Key() -> String {
+    public func getCommand9() -> String {
         return UserDefaults.standard.object(forKey: self.command9Key) as? String ?? Constants.Command.command9
     }
 
     // MARK: Get-Set Command 10
 
-    public func setCommand10Key(command: String) {
+    public func setCommand10(command: String) {
         UserDefaults.standard.set(command, forKey: self.command10Key)
     }
 
-    public func getCommand10Key() -> String {
+    public func getCommand10() -> String {
         return UserDefaults.standard.object(forKey: self.command10Key) as? String ?? Constants.Command.command10
     }
 
     // MARK: Get-Set Command Jack
 
-    public func setCommandJackKey(command: String) {
+    public func setCommandJack(command: String) {
         UserDefaults.standard.set(command, forKey: self.commandJackKey)
     }
 
-    public func getCommandJackKey() -> String {
+    public func getCommandJack() -> String {
         return UserDefaults.standard.object(forKey: self.commandJackKey) as? String ?? Constants.Command.commandJ
     }
 
     // MARK: Get-Set Command Queen
 
-    public func setCommandQueenKey(command: String) {
+    public func setCommandQueen(command: String) {
         UserDefaults.standard.set(command, forKey: self.commandQueenKey)
     }
 
-    public func getCommandQueenKey() -> String {
+    public func getCommandQueen() -> String {
         return UserDefaults.standard.object(forKey: self.commandQueenKey) as? String ?? Constants.Command.commandQ
     }
 
     // MARK: Get-Set Command King
 
-    public func setCommandKingKey(command: String) {
+    public func setCommandKing(command: String) {
         UserDefaults.standard.set(command, forKey: self.commandKingKey)
     }
 
-    public func getCommandKingKey() -> String {
+    public func getCommandKing() -> String {
         return UserDefaults.standard.object(forKey: self.commandKingKey) as? String ?? Constants.Command.commandK
+    }
+
+    // MARK: Get-Set Command Ace
+
+    public func setCommandAce(command: String) {
+        UserDefaults.standard.set(command, forKey: self.commandAceKey)
+    }
+
+    public func getCommandAce() -> String {
+        return UserDefaults.standard.object(forKey: self.commandAceKey) as? String ?? Constants.Command.commandA
     }
 }

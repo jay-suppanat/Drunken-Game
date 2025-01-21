@@ -26,7 +26,7 @@ struct GameViewContentView: View {
 
             HStack {
                 ZStack {
-                    Image(self.isOpen ? self.showCard : "backCard")
+                    Image(AssetsManager.backCard.rawValue)
                         .resizable()
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .frame(width: 200, height: 300)

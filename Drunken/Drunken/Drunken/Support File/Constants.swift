@@ -50,19 +50,19 @@ enum Constants {
       static let commandA = "กินหมดแก้ว"
 
       static let commandArray = [
-        UserDefault.shared.getCommand2(),
-        UserDefault.shared.getCommand3(),
-        UserDefault.shared.getCommand4(),
-        UserDefault.shared.getCommand5(),
-        UserDefault.shared.getCommand6(),
-        UserDefault.shared.getCommand7(),
-        UserDefault.shared.getCommand8(),
-        UserDefault.shared.getCommand9(),
-        UserDefault.shared.getCommand10(),
-        UserDefault.shared.getCommandJ(),
-        UserDefault.shared.getCommandQ(),
-        UserDefault.shared.getCommandK(),
-        UserDefault.shared.getCommandA(),
+        UserDefaultManager.shared.getCommand2(),
+        UserDefaultManager.shared.getCommand3(),
+        UserDefaultManager.shared.getCommand4(),
+        UserDefaultManager.shared.getCommand5(),
+        UserDefaultManager.shared.getCommand6(),
+        UserDefaultManager.shared.getCommand7(),
+        UserDefaultManager.shared.getCommand8(),
+        UserDefaultManager.shared.getCommand9(),
+        UserDefaultManager.shared.getCommand10(),
+        UserDefaultManager.shared.getCommandJack(),
+        UserDefaultManager.shared.getCommandQueen(),
+        UserDefaultManager.shared.getCommandKing(),
+        UserDefaultManager.shared.getCommandAce()
       ]
     }
 }

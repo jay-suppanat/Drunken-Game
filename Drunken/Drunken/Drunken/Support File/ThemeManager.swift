@@ -13,8 +13,6 @@ enum ThemeManager {
     }
 
     enum Colors {
-
-
         static let black = Color.black
     }
 }
