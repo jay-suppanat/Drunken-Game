@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct GameViewContentView: View {
+    @StateObject private var viewModel: GameContentViewModel = GameContentViewModel()
     @State private var isOpen: Bool = false
     @State private var isShowCommand: Bool = false
-    @StateObject private var cardManager: GameContentViewModel = GameContentViewModel()
-
 
     var body: some View {
         VStack(spacing: 20) {
@@ -34,7 +33,7 @@ struct GameViewContentView: View {
                         .frame(width: 200, height: 300)
                         .aspectRatio(contentMode: .fill)
                         .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
-                        .animation(.easeInOut(duration: 0.5), value: self.isOpen)
+                        .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
 
                     Button {
                         self.touchCardView()
@@ -50,9 +49,8 @@ struct GameViewContentView: View {
             .fullScreenCover(isPresented: $isShowCommand, onDismiss: {
                 self.isOpen.toggle()
             }, content: {
-                CommandContentView(cardNumber: self.cardManager.card,
+                CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
                                    isDismiss: $isShowCommand)
-                    .presentationBackground(Color.white.opacity(0.3))
             })
 
             Spacer()
@@ -61,10 +59,10 @@ struct GameViewContentView: View {
 
     private func touchCardView() {
         self.isOpen.toggle()
-        self.cardManager.randomCard()
+        self.viewModel.randomCard()
 
         // Delay equal to animation duration
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
             self.isShowCommand.toggle()
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommandContentView: View {
-    @State var cardNumber: String
+    @StateObject var viewModel: CommandContentViewModel
     @Binding var isDismiss: Bool
 
     var body: some View {
@@ -23,20 +23,20 @@ struct CommandContentView: View {
                     self.isDismiss = false
                 } label: {
                     VStack {
-                        Image(self.cardNumber)
+                        Image(self.viewModel.card)
                             .resizable()
                             .clipShape(RoundedRectangle(cornerRadius: 14))
                             .frame(width: 267, height: 400)
                             .aspectRatio(contentMode: .fill)
 
-                        Text("Your Card: \(DrunkenUtil().getCardText(card: self.cardNumber))")
+                        Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.card))")
                             .font(.system(size: 16, weight: .bold, design: .serif))
 
                         VStack(spacing: 10) {
                             Text("Description Punishment")
                                 .font(.system(size: 16, weight: .bold, design: .serif))
 
-                            Text(DrunkenUtil().getPunishment(card: self.cardNumber))
+                            Text(DrunkenUtil().getPunishment(card: self.viewModel.card))
                                 .font(.system(size: 16, weight: .medium, design: .serif))
                                 .frame(alignment: .leading)
                         }

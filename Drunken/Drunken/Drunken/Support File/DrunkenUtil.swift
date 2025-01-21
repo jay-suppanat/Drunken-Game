@@ -6,7 +6,7 @@
 //
 
 class DrunkenUtil {
-    public func getCardText(card: String) -> String {
+    public func getCardNumberText(card: String) -> String {
         var numb: String = ""
         var suit: String = ""
 
