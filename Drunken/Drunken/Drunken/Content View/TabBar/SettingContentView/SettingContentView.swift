@@ -11,15 +11,22 @@ struct SettingContentView: View {
     @StateObject var viewModel = SettingContentViewModel()
 
     var body: some View {
-        NavigationStack {
-            List(self.viewModel.settingMenu.list) { item in
-                SettingCellView(id: item.id,
-                                title: item.title,
-                                image: item.image)
+        ScrollView {
+            NavigationView {
+                VStack {
+                    ForEach(self.viewModel.settingMenu.list) { item in
+                        SettingCellView(id: item.id,
+                                        title: item.title,
+                                        image: item.image)
+                        .padding(.horizontal)
+                        .frame(height: 40)
+                    }
+
+                    Spacer()
+                }
             }
         }
-        .navigationTitle("Setting")
-        .navigationBarTitleDisplayMode(.large)
+        .padding(.top, 10)
     }
 }
 
@@ -31,13 +38,19 @@ struct SettingCellView: View {
     var image: String
 
     var body: some View {
-        HStack {
-            Image(systemName: self.image)
+        ZStack {
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color.backgroundColor)
 
-            Text(self.title)
-                .foregroundStyle(self.id == 1 ? .red : .black)
+            HStack {
+                Image(systemName: self.image)
 
-            Spacer()
+                Text(self.title)
+                    .foregroundStyle(self.id == 1 ? .red : .black)
+
+                Spacer()
+            }
+            .padding(.horizontal)
         }
     }
 }

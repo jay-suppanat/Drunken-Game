@@ -7,8 +7,8 @@
 
 class DrunkenUtil {
     public func getCardNumberText(card: String) -> String {
-        var numb: String = ""
-        var suit: String = ""
+        var numb = ""
+        var suit = ""
 
         if let firstChar = card.first {
             numb = String(firstChar)
@@ -61,6 +61,39 @@ class DrunkenUtil {
             return UserDefaultManager.shared.getCommandAce()
         default:
             return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+        }
+    }
+
+    public func setPunishment(card: String, newCommand: String) {
+        switch card {
+        case let str where str.contains("2"):
+            UserDefaultManager.shared.setCommand2(command: newCommand)
+        case let str where str.contains("3"):
+            UserDefaultManager.shared.setCommand3(command: newCommand)
+        case let str where str.contains("4"):
+            UserDefaultManager.shared.setCommand4(command: newCommand)
+        case let str where str.contains("5"):
+            UserDefaultManager.shared.setCommand5(command: newCommand)
+        case let str where str.contains("6"):
+            UserDefaultManager.shared.setCommand6(command: newCommand)
+        case let str where str.contains("7"):
+            UserDefaultManager.shared.setCommand7(command: newCommand)
+        case let str where str.contains("8"):
+            UserDefaultManager.shared.setCommand8(command: newCommand)
+        case let str where str.contains("9"):
+            UserDefaultManager.shared.setCommand9(command: newCommand)
+        case let str where str.contains("0"):
+            UserDefaultManager.shared.setCommand10(command: newCommand)
+        case let str where str.contains("J"):
+            UserDefaultManager.shared.setCommandJack(command: newCommand)
+        case let str where str.contains("Q"):
+            UserDefaultManager.shared.setCommandQueen(command: newCommand)
+        case let str where str.contains("K"):
+            UserDefaultManager.shared.setCommandKing(command: newCommand)
+        case let str where str.contains("A"):
+            UserDefaultManager.shared.setCommandAce(command: newCommand)
+        default:
+            print("[Fuckkkkkkkkkkkkkk, My app have bug.]")
         }
     }
 }

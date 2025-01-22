@@ -15,19 +15,24 @@ struct TabBarContentView: View {
         TabView(selection: $tabBarSelection) {
             GameViewContentView()
                 .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Game")
+                    VStack {
+                        Image(systemName: "house.fill")
+                        Text("Game")
+                    }
                 }
                 .tag(0)
 
             SettingContentView()
                 .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Setting")
+                    VStack {
+                        Image(systemName: "gearshape.fill")
+                        Text("Setting")
+                    }
                 }
                 .tag(1)
         }
         .tint(Color.blackColor)
+        .padding(.top, 10)
     }
 }
 

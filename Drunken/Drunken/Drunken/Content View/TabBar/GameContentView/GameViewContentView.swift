@@ -24,7 +24,7 @@ struct GameViewContentView: View {
                         } label: {
                             Image(systemName: "pencil.circle.fill")
                                 .resizable()
-                                .frame(width: 45, height: 45)
+                                .frame(width: 40, height: 40)
                                 .tint(Color.blackColor)
                         }
                     }
@@ -50,18 +50,22 @@ struct GameViewContentView: View {
                                 .frame(width: 200, height: 300)
                                 .aspectRatio(contentMode: .fill)
                         }
+                        .disabled(self.isOpen)
                     }
                 }
-                .fullScreenCover(isPresented: $isShowCommand, onDismiss: {
-                    self.isOpen.toggle()
+                .fullScreenCover(isPresented: self.$isShowCommand, onDismiss: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
+                        self.isOpen.toggle()
+                    }
                 }, content: {
                     CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
-                                       isDismiss: $isShowCommand)
+                                       isDismiss: self.$isShowCommand)
                 })
 
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 
     private func touchCardView() {
@@ -77,4 +81,5 @@ struct GameViewContentView: View {
 
 #Preview {
     GameViewContentView()
+        .background(Color.orange)
 }

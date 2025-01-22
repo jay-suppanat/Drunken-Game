@@ -12,6 +12,12 @@ enum Constants {
 
     enum Button {
         static let random = "Random"
+        static let cancel = "Cancel"
+        static let submit = "Submit"
+    }
+
+    enum Text {
+        static let enterNewCommand = "Enter new command."
     }
 
     enum CardDeck {
@@ -64,5 +70,21 @@ enum Constants {
         UserDefaultManager.shared.getCommandKing(),
         UserDefaultManager.shared.getCommandAce()
       ]
+
+        static let commandTitleArray = [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "J",
+            "Q",
+            "K",
+            "A",
+        ]
     }
 }
