@@ -10,6 +10,8 @@ import Foundation
 class GameContentViewModel: ObservableObject {
     @Published public var card: String = ""
     @Published public var isGameEnd: Bool = false
+    @Published public var isCanEditCommand: Bool = true
+    @Published public var isShowAlert: Bool = false
 
     init() {}
 
@@ -39,7 +41,10 @@ class GameContentViewModel: ObservableObject {
 
 extension GameContentViewModel: Logic {
     public func randomCard() {
+        self.isCanEditCommand = false
+
         if self.cardDeck.kingCard.isEmpty {
+            self.isShowAlert = true
             self.isGameEnd = true
         } else {
             guard let index = (0..<self.cardDeck.cardDeck.count).randomElement() else { return }
@@ -67,10 +72,20 @@ extension GameContentViewModel: Logic {
         print("Fill Card Deck: \(self.cardDeck.cardDeck.count)")
         print("Fill King Card: \(self.cardDeck.kingCard.count)")
 
+        self.isCanEditCommand = true
+        self.isShowAlert = false
         self.isGameEnd = false
     }
 
     public func getAnimationTime() -> TimeInterval {
-        return 0.3
+        return 0.2
+    }
+
+    public func touchCancelAlertButton() {
+        self.isGameEnd = false
+    }
+
+    public func touchResetButton() {
+        self.isShowAlert = true
     }
 }

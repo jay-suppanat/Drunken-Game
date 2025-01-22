@@ -14,9 +14,29 @@ struct GameViewContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 150) {
+            VStack(spacing: 130) {
                 HStack {
                     Spacer()
+
+                    Button {
+                        self.viewModel.touchResetButton()
+                    } label: {
+                        Image(systemName: "repeat.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .tint(Color.blackColor)
+                    }
+                    .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
+                        Button("Restart") {
+                            self.viewModel.fillCard()
+                        }
+
+                        Button("Cancel", role: .cancel) {
+                            self.viewModel.touchCancelAlertButton()
+                        }
+                    } message: {
+                        Text("Would you like to restart?")
+                    }
 
                     Button {} label: {
                         NavigationLink {
@@ -24,10 +44,11 @@ struct GameViewContentView: View {
                         } label: {
                             Image(systemName: "pencil.circle.fill")
                                 .resizable()
-                                .frame(width: 40, height: 40)
+                                .frame(width: 30, height: 30)
                                 .tint(Color.blackColor)
                         }
                     }
+                    .disabled(!self.viewModel.isCanEditCommand)
                 }
                 .padding(.horizontal)
 
@@ -61,6 +82,17 @@ struct GameViewContentView: View {
                     CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
                                        isDismiss: self.$isShowCommand)
                 })
+                .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
+                    Button("Restart") {
+                        self.viewModel.fillCard()
+                    }
+
+                    Button("Cancel", role: .cancel) {
+                        self.viewModel.touchCancelAlertButton()
+                    }
+                } message: {
+                    Text("Would you like to restart?")
+                }
 
                 Spacer()
             }
