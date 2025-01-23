@@ -45,18 +45,10 @@ struct CommandContentView: View {
 
                 Spacer()
             }
-            .background(Color.clear)
             .tint(Color.textColor)
 
             Spacer()
         }
-    }
-}
-
-struct XView: View {
-    var body: some View {
-        Color.backgroundColor.opacity(0.9)
-            .ignoresSafeArea()
     }
 }
 

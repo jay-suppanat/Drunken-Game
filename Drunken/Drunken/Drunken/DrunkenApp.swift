@@ -22,8 +22,9 @@ struct DrunkenApp: App {
 
     private func initTabBarAppearance() {
         let appearance = UITabBar.appearance()
-        appearance.backgroundColor = UIColor.tabBarBackgroundColor
+        appearance.backgroundColor = UIColor.clear
         appearance.unselectedItemTintColor = UIColor.lightGray
+        appearance.tintColor = UIColor.systemYellow
     }
 
     private func initNavigationAppearance() {
