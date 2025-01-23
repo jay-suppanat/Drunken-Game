@@ -14,12 +14,16 @@ struct EditCommandContentView: View {
     @State private var isShowAlert: Bool = false
 
     var body: some View {
-        VStack {
-            List(0 ..< Constants.Command.commandArray.count) { index in
-                EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
-            }
+        ZStack {
+            // MARK: Background View
+            AnimationBackgroundContentView(colorArrays: [Color.backgroundColor])
 
-            Spacer()
+            // MARK: List Content
+            List(0 ..< Constants.Command.commandArray.count, id: \.self) { index in
+                EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
+                    .listRowBackground(Color.blackColor.opacity(0.5))
+            }
+            .setupListView()
         }
         .setupNavigationBar(title: Constants.Text.editCommand)
     }
@@ -79,9 +83,6 @@ struct EditCommandAlert: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray, lineWidth: 1)
-                    }
-                    .onAppear {
-                        self.newCommand = ""
                     }
 
                 HStack(spacing: 50) {

@@ -6,10 +6,15 @@
 //
 
 import SwiftUICore
+import SwiftUI
 
 extension View {
-    func setupNavigationBar(title: String) -> some View {
+    public func setupNavigationBar(title: String) -> some View {
         self.modifier(NavigationBarModifier(title: title))
+    }
+
+    public func setupListView() -> some View {
+        self.modifier(ListViewModifier())
     }
 }
 
@@ -20,11 +25,23 @@ struct NavigationBarModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .toolbarBackground(Color.navigationBackgroundColor, for: .navigationBar)
-            .toolbarColorScheme(.light, for: .navigationBar)
-            .navigationTitle(self.title)
+            .toolbarBackground(Color.blackColor, for: .navigationBar)
+            .toolbar(content: {
+                ToolbarItem(placement: .principal) {
+                    Text(self.title)
+                        .foregroundStyle(Color.whiteColor)
+                }
+            })
             .navigationBarTitleDisplayMode(.large)
             .toolbarRole(.editor)
-            .toolbarBackground(Color.navigationBackgroundColor, for: .navigationBar)
+    }
+}
+
+// MARK: ListViewModifier
+
+struct ListViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .scrollContentBackground(.hidden)
     }
 }

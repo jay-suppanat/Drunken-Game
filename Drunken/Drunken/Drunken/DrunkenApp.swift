@@ -11,7 +11,6 @@ import SwiftUI
 struct DrunkenApp: App {
     init() {
         self.initTabBarAppearance()
-        self.initNavigationAppearance()
     }
 
     var body: some Scene {
@@ -21,19 +20,12 @@ struct DrunkenApp: App {
     }
 
     private func initTabBarAppearance() {
-        let appearance = UITabBar.appearance()
-        appearance.backgroundColor = UIColor.clear
-        appearance.unselectedItemTintColor = UIColor.unselectedTabBarColor
-    }
-
-    private func initNavigationAppearance() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBlue
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        let itemAppearance = UITabBar.appearance()
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor(named: "black_color")
+        itemAppearance.standardAppearance = appearance
+        itemAppearance.scrollEdgeAppearance = appearance
+        itemAppearance.unselectedItemTintColor = UIColor.unselectedTabBarColor
     }
 }
