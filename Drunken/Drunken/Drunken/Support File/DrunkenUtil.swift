@@ -34,6 +34,8 @@ class DrunkenUtil: AppUtil {
     }
 
     public func getPunishment(card: String) -> String {
+        print("Get Punishment")
+
         switch card {
         case let str where str.contains("2"):
             return UserDefaultManager.shared.getCommand2()
@@ -67,6 +69,8 @@ class DrunkenUtil: AppUtil {
     }
 
     public func setPunishment(card: String, newCommand: String) {
+        print("Set Punishment")
+
         switch card {
         case let str where str.contains("2"):
             UserDefaultManager.shared.setCommand2(command: newCommand)
@@ -100,6 +104,8 @@ class DrunkenUtil: AppUtil {
     }
 
     public func resetPunishment() {
+        print("Reset Punishment")
+
         UserDefaultManager.shared.setCommand2(command: Constants.Command.command2)
         UserDefaultManager.shared.setCommand3(command: Constants.Command.command3)
         UserDefaultManager.shared.setCommand4(command: Constants.Command.command4)

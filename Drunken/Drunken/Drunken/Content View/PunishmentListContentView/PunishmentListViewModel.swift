@@ -21,11 +21,7 @@ class PunishmentListViewModel: ObservableObject {
 // MARK: Logic
 
 extension PunishmentListViewModel: Logic {
-    public func updateCommand() {
-        self.allCommandPublished = Constants.Command.commandArray
-    }
-
     public func resetPunishment() {
-        
+        DrunkenUtil().resetPunishment()
     }
 }

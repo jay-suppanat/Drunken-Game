@@ -19,37 +19,46 @@ struct PunishmentListContentView: View {
             // MARK: Background View
             AnimationBackgroundContentView(colorArrays: [Color.backgroundColor])
 
-            // MARK: List Content
-            List(0 ..< Constants.Command.commandArray.count, id: \.self) { index in
-                EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
-                    .listRowBackground(Color.darkGrayColor.opacity(0.5))
+            VStack {
+                // MARK: Reset Button
+                HStack {
+                    Spacer()
+
+                    Button {
+                        self.isShowResetAlert.toggle()
+                        self.viewModel.resetPunishment()
+                    } label: {
+                        HStack {
+                            Image(systemName: "arrow.clockwise.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30, alignment: .trailing)
+                                .tint(Color.white)
+                        }
+                    }
+                    .frame(width: 30, height: 30, alignment: .trailing)
+                    .alert("Game End", isPresented: self.$isShowResetAlert) {
+                        Button("Reset") {
+                            self.isShowResetAlert = false
+                        }
+
+                        Button("Cancel", role: .cancel) {
+                            self.isShowResetAlert = true
+                        }
+                    } message: {
+                        Text("Would you like to reset all punishment?")
+                    }
+                }
+
+                // MARK: List Content
+                List(0 ..< Constants.Command.commandArray.count, id: \.self) { index in
+                    EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
+                        .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                }
+                .setupListView()
             }
-            .setupListView()
+            .padding(.horizontal)
         }
         .setupNavigationBar(title: Constants.Text.editCommand)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-
-                } label: {
-                    Image(systemName: "arrow.clockwise.circle.fill")
-                        .resizable()
-                        .tint(Color.white)
-                }
-                .alert("Game End", isPresented: self.$isShowResetAlert) {
-                    Button("Reset") {
-                        self.isShowResetAlert = true
-                    }
-
-                    Button("Cancel", role: .cancel) {
-                        self.isShowResetAlert = false
-                    }
-                    .tint(Color.redColor)
-                } message: {
-                    Text("Would you like to reset all punishment?")
-                }
-            }
-        }
     }
 }
 
