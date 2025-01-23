@@ -41,7 +41,7 @@ struct PunishmentListContentView: View {
                             self.isShowResetAlert = false
                         }
 
-                        Button("Cancel", role: .destructive) {
+                        Button("Cancel", role: .cancel) {
                             self.isShowResetAlert = true
                         }
                     } message: {
@@ -111,14 +111,20 @@ struct EditCommandAlert: View {
 
             VStack(spacing: 30) {
                 Text(self.command)
+                    .frame(alignment: .center)
 
                 TextEditor(text: self.$newCommand)
                     .frame(height: 150)
+                    .background(Color.darkGrayColor)
                     .cornerRadius(10)
-                    .padding(.horizontal)
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray, lineWidth: 1)
+                    }
+                    .foregroundStyle(Color.whiteColor)
+                    .scrollContentBackground(.hidden)
+                    .onDisappear {
+                        self.newCommand = ""
                     }
 
                 HStack(spacing: 50) {
@@ -129,7 +135,8 @@ struct EditCommandAlert: View {
                         self.touchCancel()
                     } label: {
                         Text(Constants.Button.cancel)
-                            .padding()
+                            .padding(.vertical, 5)
+                            .padding(.horizontal)
                             .tint(Color.textColor)
                     }
                     .background(Color.redColor)
@@ -140,7 +147,8 @@ struct EditCommandAlert: View {
                         self.touchSubmit()
                     } label: {
                         Text(Constants.Button.submit)
-                            .padding()
+                            .padding(.vertical, 5)
+                            .padding(.horizontal)
                             .tint(Color.textColor)
                     }
                     .background(Color.greenColor)

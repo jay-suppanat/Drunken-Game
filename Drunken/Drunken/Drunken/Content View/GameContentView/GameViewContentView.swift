@@ -41,7 +41,7 @@ struct GameViewContentView: View {
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)
                         }
-                        .alert("Alert", isPresented: self.$viewModel.isShowAlert) {
+                        .alert("Would you like to restart?", isPresented: self.$viewModel.isShowAlert) {
                             Button("Restart") {
                                 self.viewModel.fillCard()
                             }
@@ -49,8 +49,6 @@ struct GameViewContentView: View {
                             Button("Cancel", role: .cancel) {
                                 self.viewModel.touchCancelAlertButton()
                             }
-                        } message: {
-                            Text("Would you like to restart?")
                         }
 
                         // MARK: Edit Command Button
@@ -109,16 +107,14 @@ struct GameViewContentView: View {
                         PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
                                            isDismiss: self.$isShowCommand)
                     })
-                    .alert("Game End", isPresented: self.$viewModel.isGameEnd) {
+                    .alert("Would you like to restart the game?", isPresented: self.$viewModel.isGameEnd) {
                         Button("Restart") {
                             self.viewModel.fillCard()
                         }
 
-                        Button("Cancel", role: .destructive) {
+                        Button("Cancel", role: .cancel) {
                             self.viewModel.touchCancelAlertButton()
                         }
-                    } message: {
-                        Text("Would you like to restart?")
                     }
 
                     Spacer()
