@@ -41,7 +41,7 @@ struct GameViewContentView: View {
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)
                         }
-                        .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
+                        .alert("Alert", isPresented: self.$viewModel.isShowAlert) {
                             Button("Restart") {
                                 self.viewModel.fillCard()
                             }
@@ -109,7 +109,7 @@ struct GameViewContentView: View {
                         PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
                                            isDismiss: self.$isShowCommand)
                     })
-                    .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
+                    .alert("Game End", isPresented: self.$viewModel.isGameEnd) {
                         Button("Restart") {
                             self.viewModel.fillCard()
                         }
