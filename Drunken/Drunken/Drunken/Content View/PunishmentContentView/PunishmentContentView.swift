@@ -41,7 +41,10 @@ struct PunishmentContentView: View {
                         }
                     }
                 }
+
+                Spacer()
             }
+            .padding(.top, 50)
             .tint(Color.textColor)
 
             Spacer()
