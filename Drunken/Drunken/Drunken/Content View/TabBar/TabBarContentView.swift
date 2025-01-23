@@ -13,6 +13,8 @@ struct TabBarContentView: View {
 
     var body: some View {
         TabView(selection: $tabBarSelection) {
+
+            // MARK: Game Content View
             GameViewContentView()
                 .tabItem {
                     VStack {
@@ -23,6 +25,7 @@ struct TabBarContentView: View {
                 }
                 .tag(0)
 
+            // MARK: Setting Content View
             SettingContentView()
                 .tabItem {
                     VStack {
