@@ -13,13 +13,16 @@ struct CommandContentView: View {
 
     var body: some View {
         ZStack {
+            Color.backgroundColor
+                .ignoresSafeArea()
+
             VStack {
                 Spacer()
 
                 Button {
                     self.isDismiss = false
                 } label: {
-                    VStack {
+                    VStack(spacing: 20) {
                         Image(self.viewModel.card)
                             .resizable()
                             .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -42,6 +45,10 @@ struct CommandContentView: View {
 
                 Spacer()
             }
+            .background(Color.clear)
+            .tint(Color.textColor)
+
+            Spacer()
         }
     }
 }
