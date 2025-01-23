@@ -69,17 +69,7 @@ struct GameViewContentView: View {
                             .onAppear {
                                 self.isGoToEditView = false
                             }
-
-                            if !self.viewModel.isCanEditCommand {
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .frame(width: 30, height: 30)
-                            } else {
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .frame(width: 30, height: 30)
-                                    .hidden()
-                            }
+                            .scaleEffect(!self.viewModel.isCanEditCommand ? 0 : 1)
                         }
                     }
                     .tint(Color.blackColor)
