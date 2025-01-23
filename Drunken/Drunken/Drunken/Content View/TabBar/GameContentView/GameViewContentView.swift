@@ -116,7 +116,7 @@ struct GameViewContentView: View {
                             self.viewModel.fillCard()
                         }
 
-                        Button("Cancel", role: .cancel) {
+                        Button("Cancel", role: .destructive) {
                             self.viewModel.touchCancelAlertButton()
                         }
                     } message: {

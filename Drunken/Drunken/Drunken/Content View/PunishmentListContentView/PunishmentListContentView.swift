@@ -41,7 +41,7 @@ struct PunishmentListContentView: View {
                             self.isShowResetAlert = false
                         }
 
-                        Button("Cancel", role: .cancel) {
+                        Button("Cancel", role: .destructive) {
                             self.isShowResetAlert = true
                         }
                     } message: {
@@ -103,8 +103,8 @@ struct EditCommandAlert: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.whiteColor)
+            Color.blackColor
+                .ignoresSafeArea()
 
             VStack(spacing: 30) {
                 Text(self.command)
