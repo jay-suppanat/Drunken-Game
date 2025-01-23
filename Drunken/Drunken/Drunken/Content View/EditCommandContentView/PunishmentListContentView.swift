@@ -9,9 +9,10 @@ import SwiftUI
 
 // MARK: EditCommandContentView
 
-struct EditCommandContentView: View {
-    @StateObject var viewModel: EditCommandViewModel
+struct PunishmentListContentView: View {
+    @StateObject var viewModel: PunishmentListViewModel
     @State private var isShowAlert: Bool = false
+    @State private var isShowResetAlert: Bool = false
 
     var body: some View {
         ZStack {
@@ -26,6 +27,29 @@ struct EditCommandContentView: View {
             .setupListView()
         }
         .setupNavigationBar(title: Constants.Text.editCommand)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+
+                } label: {
+                    Image(systemName: "arrow.clockwise.circle.fill")
+                        .resizable()
+                        .tint(Color.white)
+                }
+                .alert("Game End", isPresented: self.$isShowResetAlert) {
+                    Button("Reset") {
+                        self.isShowResetAlert = true
+                    }
+
+                    Button("Cancel", role: .cancel) {
+                        self.isShowResetAlert = false
+                    }
+                    .tint(Color.redColor)
+                } message: {
+                    Text("Would you like to reset all punishment?")
+                }
+            }
+        }
     }
 }
 

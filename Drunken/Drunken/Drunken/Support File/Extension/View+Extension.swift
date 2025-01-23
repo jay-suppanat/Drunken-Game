@@ -22,7 +22,6 @@ extension View {
 
 struct NavigationBarModifier: ViewModifier {
     public var title: String
-
     func body(content: Content) -> some View {
         content
             .toolbarBackground(Color.blackColor, for: .navigationBar)
@@ -32,7 +31,6 @@ struct NavigationBarModifier: ViewModifier {
                         .foregroundStyle(Color.whiteColor)
                 }
             })
-            .navigationBarTitleDisplayMode(.large)
             .toolbarRole(.editor)
     }
 }

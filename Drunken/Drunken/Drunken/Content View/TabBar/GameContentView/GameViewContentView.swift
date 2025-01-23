@@ -66,7 +66,7 @@ struct GameViewContentView: View {
                                     .tint(self.viewModel.isCanEditCommand ? Color.whiteColor : Color.redColor)
                             }
                             .navigationDestination(isPresented: self.$isGoToEditView) {
-                                EditCommandContentView(viewModel: EditCommandViewModel())
+                                PunishmentListContentView(viewModel: PunishmentListViewModel())
                             }
                             .onAppear {
                                 self.isGoToEditView = false
@@ -108,7 +108,7 @@ struct GameViewContentView: View {
                             self.isOpen.toggle()
                         }
                     }, content: {
-                        CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
+                        PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
                                            isDismiss: self.$isShowCommand)
                     })
                     .alert("Game End", isPresented: self.$viewModel.isShowAlert) {

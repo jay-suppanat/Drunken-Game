@@ -18,3 +18,12 @@ protocol Service {}
 // MARK: Logic
 
 protocol Logic {}
+
+// MARK: AppUtil
+
+protocol AppUtil {
+    func getCardNumberText(card: String) -> String
+    func getPunishment(card: String) -> String
+    func setPunishment(card: String, newCommand: String)
+    func resetPunishment()
+}

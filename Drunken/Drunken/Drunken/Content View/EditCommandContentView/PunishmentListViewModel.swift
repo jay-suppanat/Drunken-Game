@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class EditCommandViewModel: ObservableObject {
+class PunishmentListViewModel: ObservableObject {
     @Published public var allCommandPublished: [String] = []
     @Published public var allCommandTitlePublished: [String] = []
 
@@ -20,8 +20,12 @@ class EditCommandViewModel: ObservableObject {
 
 // MARK: Logic
 
-extension EditCommandViewModel: Logic {
+extension PunishmentListViewModel: Logic {
     public func updateCommand() {
         self.allCommandPublished = Constants.Command.commandArray
+    }
+
+    public func resetPunishment() {
+        
     }
 }

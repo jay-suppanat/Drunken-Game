@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CommandContentView: View {
-    @StateObject var viewModel: CommandContentViewModel
+struct PunishmentContentView: View {
+    @StateObject var viewModel: PunishmentContentViewModel
     @Binding var isDismiss: Bool
 
     var body: some View {

@@ -5,7 +5,9 @@
 //  Created by Suppanat Chinthumrucks on 21/1/2568 BE.
 //
 
-class DrunkenUtil {
+import Foundation
+
+class DrunkenUtil: AppUtil {
     public func getCardNumberText(card: String) -> String {
         var numb = ""
         var suit = ""
@@ -95,5 +97,21 @@ class DrunkenUtil {
         default:
             print("[Fuckkkkkkkkkkkkkk, My app have bug.]")
         }
+    }
+
+    public func resetPunishment() {
+        UserDefaultManager.shared.setCommand2(command: Constants.Command.command2)
+        UserDefaultManager.shared.setCommand3(command: Constants.Command.command3)
+        UserDefaultManager.shared.setCommand4(command: Constants.Command.command4)
+        UserDefaultManager.shared.setCommand5(command: Constants.Command.command5)
+        UserDefaultManager.shared.setCommand6(command: Constants.Command.command6)
+        UserDefaultManager.shared.setCommand7(command: Constants.Command.command7)
+        UserDefaultManager.shared.setCommand8(command: Constants.Command.command8)
+        UserDefaultManager.shared.setCommand9(command: Constants.Command.command9)
+        UserDefaultManager.shared.setCommand10(command: Constants.Command.command10)
+        UserDefaultManager.shared.setCommandJack(command: Constants.Command.commandJ)
+        UserDefaultManager.shared.setCommandQueen(command: Constants.Command.commandQ)
+        UserDefaultManager.shared.setCommandKing(command: Constants.Command.commandK)
+        UserDefaultManager.shared.setCommandAce(command: Constants.Command.commandA)
     }
 }

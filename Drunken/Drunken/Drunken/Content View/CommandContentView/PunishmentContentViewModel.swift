@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CommandContentViewModel: ObservableObject {
+class PunishmentContentViewModel: ObservableObject {
     @Published var card: String
 
     init(card: String) {
