@@ -20,9 +20,8 @@ struct GameViewContentView: View {
                 Color.backgroundColor
                     .ignoresSafeArea()
 
-                VStack(spacing: 130) {
+                VStack(spacing: 175) {
                     HStack {
-
                         Button {
                             // Action open side menu
                         } label: {
@@ -60,7 +59,7 @@ struct GameViewContentView: View {
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: !self.viewModel.isCanEditCommand ? 0 : 30, height: 30)
                                     .tint(self.viewModel.isCanEditCommand ? Color.blackColor : Color.redColor)
                             }
                             .navigationDestination(isPresented: self.$isGoToEditView) {
@@ -69,7 +68,6 @@ struct GameViewContentView: View {
                             .onAppear {
                                 self.isGoToEditView = false
                             }
-                            .scaleEffect(!self.viewModel.isCanEditCommand ? 0 : 1)
                         }
                     }
                     .tint(Color.blackColor)
@@ -82,6 +80,7 @@ struct GameViewContentView: View {
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .frame(width: 200, height: 300)
+                                .scaleEffect(1.5)
                                 .aspectRatio(contentMode: .fill)
                                 .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
                                 .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
@@ -95,6 +94,7 @@ struct GameViewContentView: View {
                                     .resizable()
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                                     .frame(width: 200, height: 300)
+                                    .scaleEffect(1.5)
                                     .aspectRatio(contentMode: .fill)
                             }
                             .disabled(self.isOpen)
@@ -122,6 +122,7 @@ struct GameViewContentView: View {
 
                     Spacer()
                 }
+                .padding(.top, 20)
             }
             .toolbarVisibility(.hidden, for: .navigationBar)
         }

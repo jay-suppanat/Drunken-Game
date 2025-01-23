@@ -17,22 +17,17 @@ struct TabBarContentView: View {
             // MARK: Game Content View
             GameViewContentView()
                 .tabItem {
-                    VStack {
-                        Image(systemName: "house.fill")
-                        Text("Game")
-                    }
-                    .padding(.top, 10)
+                    Image(systemName: "house.fill")
+                    Text("Game")
+
                 }
                 .tag(0)
 
             // MARK: Setting Content View
             SettingContentView()
                 .tabItem {
-                    VStack {
-                        Image(systemName: "gearshape.fill")
-                        Text("Setting")
-                    }
-                    .padding(.top, 10)
+                    Image(systemName: "gearshape.fill")
+                    Text("Setting")
                 }
                 .tag(1)
         }
