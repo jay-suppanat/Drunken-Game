@@ -18,6 +18,7 @@ enum Constants {
 
     enum Text {
         static let enterNewCommand = "Enter new command."
+        static let editCommand = "Edit Command"
     }
 
     enum CardDeck {

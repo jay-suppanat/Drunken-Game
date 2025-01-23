@@ -21,6 +21,7 @@ struct EditCommandContentView: View {
 
             Spacer()
         }
+        .setupNavigationBar(title: Constants.Text.editCommand)
     }
 }
 
@@ -134,5 +135,5 @@ struct EditCommandAlert: View {
 }
 
 #Preview {
-    EditCommandContentView(viewModel: EditCommandViewModel())
+//    EditCommandContentView(viewModel: EditCommandViewModel())
 }

@@ -8,24 +8,97 @@
 import SwiftUI
 
 struct GameViewContentView: View {
-    @StateObject private var viewModel: GameContentViewModel = GameContentViewModel()
+    @StateObject private var viewModel: GameContentViewModel = .init()
     @State private var isOpen: Bool = false
     @State private var isShowCommand: Bool = false
+    @State private var isGoToEditView: Bool = false
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 130) {
-                HStack {
-                    Spacer()
+        NavigationStack {
+            ZStack {
+                Color.orange
+                    .ignoresSafeArea()
 
-                    Button {
-                        self.viewModel.touchResetButton()
-                    } label: {
-                        Image(systemName: "repeat.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .tint(Color.blackColor)
+                VStack(spacing: 130) {
+                    HStack {
+                        Spacer()
+
+                        // MARK: Reset Button
+
+                        Button {
+                            self.viewModel.touchResetButton()
+                        } label: {
+                            Image(systemName: "repeat.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .tint(Color.blackColor)
+                        }
+                        .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
+                            Button("Restart") {
+                                self.viewModel.fillCard()
+                            }
+
+                            Button("Cancel", role: .cancel) {
+                                self.viewModel.touchCancelAlertButton()
+                            }
+                        } message: {
+                            Text("Would you like to restart?")
+                        }
+
+                        // MARK: Edit Command Button
+
+                        Button {
+                            self.isGoToEditView = true
+                        } label: {
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .tint(Color.blackColor)
+                        }
+                        .navigationDestination(isPresented: self.$isGoToEditView) {
+                            EditCommandContentView(viewModel: EditCommandViewModel())
+                        }
+                        .disabled(!self.viewModel.isCanEditCommand)
+                        .onAppear {
+                            self.isGoToEditView = false
+                        }
                     }
+                    .padding(.horizontal)
+
+                    HStack {
+                        ZStack {
+                            // MARK: Slide Card View
+
+                            Image(AssetsManager.backCard.rawValue)
+                                .resizable()
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .frame(width: 200, height: 300)
+                                .aspectRatio(contentMode: .fill)
+                                .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
+                                .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
+
+                            // MARK: Card View Button
+
+                            Button {
+                                self.touchCardView()
+                            } label: {
+                                Image(AssetsManager.backCard.rawValue)
+                                    .resizable()
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    .frame(width: 200, height: 300)
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                            .disabled(self.isOpen)
+                        }
+                    }
+                    .fullScreenCover(isPresented: self.$isShowCommand, onDismiss: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
+                            self.isOpen.toggle()
+                        }
+                    }, content: {
+                        CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
+                                           isDismiss: self.$isShowCommand)
+                    })
                     .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
                         Button("Restart") {
                             self.viewModel.fillCard()
@@ -38,66 +111,11 @@ struct GameViewContentView: View {
                         Text("Would you like to restart?")
                     }
 
-                    Button {} label: {
-                        NavigationLink {
-                            EditCommandContentView(viewModel: EditCommandViewModel())
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .tint(Color.blackColor)
-                        }
-                    }
-                    .disabled(!self.viewModel.isCanEditCommand)
+                    Spacer()
                 }
-                .padding(.horizontal)
-
-                HStack {
-                    ZStack {
-                        Image(AssetsManager.backCard.rawValue)
-                            .resizable()
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .frame(width: 200, height: 300)
-                            .aspectRatio(contentMode: .fill)
-                            .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
-                            .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
-
-                        Button {
-                            self.touchCardView()
-                        } label: {
-                            Image(AssetsManager.backCard.rawValue)
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .frame(width: 200, height: 300)
-                                .aspectRatio(contentMode: .fill)
-                        }
-                        .disabled(self.isOpen)
-                    }
-                }
-                .fullScreenCover(isPresented: self.$isShowCommand, onDismiss: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
-                        self.isOpen.toggle()
-                    }
-                }, content: {
-                    CommandContentView(viewModel: CommandContentViewModel(card: self.viewModel.card),
-                                       isDismiss: self.$isShowCommand)
-                })
-                .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
-                    Button("Restart") {
-                        self.viewModel.fillCard()
-                    }
-
-                    Button("Cancel", role: .cancel) {
-                        self.viewModel.touchCancelAlertButton()
-                    }
-                } message: {
-                    Text("Would you like to restart?")
-                }
-
-                Spacer()
             }
+            .toolbarVisibility(.hidden, for: .navigationBar)
         }
-        .navigationBarBackButtonHidden()
     }
 
     private func touchCardView() {

@@ -19,6 +19,7 @@ struct TabBarContentView: View {
                         Image(systemName: "house.fill")
                         Text("Game")
                     }
+                    .padding(.top, 10)
                 }
                 .tag(0)
 
@@ -28,11 +29,11 @@ struct TabBarContentView: View {
                         Image(systemName: "gearshape.fill")
                         Text("Setting")
                     }
+                    .padding(.top, 10)
                 }
                 .tag(1)
         }
         .tint(Color.blackColor)
-        .padding(.top, 10)
     }
 }
 
