@@ -17,33 +17,31 @@ struct CommandContentView: View {
                 .ignoresSafeArea()
 
             VStack {
-                Spacer()
-
                 Button {
                     self.isDismiss = false
                 } label: {
-                    VStack(spacing: 20) {
-                        Image(self.viewModel.card)
-                            .resizable()
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
-                            .frame(width: 267, height: 400)
-                            .aspectRatio(contentMode: .fill)
-
+                    VStack(spacing: 30) {
                         Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.card))")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: 30, weight: .bold))
 
-                        VStack(spacing: 10) {
-                            Text("Description Punishment")
-                                .font(.system(size: 16, weight: .bold))
+                        VStack(spacing: 20) {
+                            Image(self.viewModel.card)
+                                .resizable()
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                                .frame(width: 267, height: 400)
+                                .aspectRatio(contentMode: .fill)
 
-                            Text(DrunkenUtil().getPunishment(card: self.viewModel.card))
-                                .font(.system(size: 16, weight: .medium))
-                                .frame(alignment: .leading)
+                            VStack(spacing: 10) {
+                                Text("Description Punishment")
+                                    .font(.system(size: 16, weight: .bold))
+
+                                Text(DrunkenUtil().getPunishment(card: self.viewModel.card))
+                                    .font(.system(size: 16, weight: .medium))
+                                    .frame(alignment: .leading)
+                            }
                         }
                     }
                 }
-
-                Spacer()
             }
             .tint(Color.textColor)
 

@@ -56,9 +56,8 @@ extension GameViewModel: Logic {
 
             self.cardDeck.cardDeck.remove(at: index)
 
-            print("Random Card: \(randomCard)")
-            print("King Card: \(self.cardDeck.kingCard)")
-            print("Remain Card: \(self.cardDeck.cardDeck)")
+            print("Remain Card: \(self.cardDeck.cardDeck.count)")
+            print("Remain King Card: \(self.cardDeck.kingCard.count)")
 
             self.isGameEnd = false
             self.card = randomCard
