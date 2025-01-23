@@ -29,6 +29,7 @@ struct GameViewContentView: View {
                             Image(systemName: "list.bullet.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
+                                .tint(Color.whiteColor)
                         }
 
                         Spacer()
@@ -40,6 +41,7 @@ struct GameViewContentView: View {
                             Image(systemName: "repeat.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
+                                .tint(Color.whiteColor)
                         }
                         .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
                             Button("Restart") {
@@ -61,7 +63,7 @@ struct GameViewContentView: View {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
                                     .frame(width: !self.viewModel.isCanEditCommand ? 0 : 30, height: 30)
-                                    .tint(self.viewModel.isCanEditCommand ? Color.blackColor : Color.redColor)
+                                    .tint(self.viewModel.isCanEditCommand ? Color.whiteColor : Color.redColor)
                             }
                             .navigationDestination(isPresented: self.$isGoToEditView) {
                                 EditCommandContentView(viewModel: EditCommandViewModel())

@@ -25,6 +25,5 @@ extension Color {
 
 extension UIColor {
     static let tabBarBackgroundColor = UIColor(named: "tab_bar_color")
-    static let selectedTabBarColor = UIColor(named: "yellow_color")
     static let unselectedTabBarColor = UIColor(named: "light_gray_color")
 }
