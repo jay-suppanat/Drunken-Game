@@ -53,6 +53,13 @@ struct CommandContentView: View {
     }
 }
 
+struct XView: View {
+    var body: some View {
+        Color.backgroundColor.opacity(0.9)
+            .ignoresSafeArea()
+    }
+}
+
 #Preview {
 //    CommandContentView(cardNumber: "2")
 }

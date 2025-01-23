@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameViewContentView: View {
-    @StateObject private var viewModel: GameContentViewModel = .init()
+    @StateObject private var viewModel: GameViewModel = .init()
     @State private var isOpen: Bool = false
     @State private var isShowCommand: Bool = false
     @State private var isGoToEditView: Bool = false
