@@ -19,6 +19,7 @@ extension Color {
     static let greenColor = Color("green_color")
     static let navigationBackgroundColor = Color("tab_bar_color")
     static let yellowColor = Color("yellow_color")
+    static let darkGrayColor = Color("dark_gray_color")
 }
 
 // MARK: UIColor

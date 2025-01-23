@@ -30,14 +30,14 @@ struct CommandContentView: View {
                             .aspectRatio(contentMode: .fill)
 
                         Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.card))")
-                            .font(.system(size: 16, weight: .bold, design: .serif))
+                            .font(.system(size: 16, weight: .bold))
 
                         VStack(spacing: 10) {
                             Text("Description Punishment")
-                                .font(.system(size: 16, weight: .bold, design: .serif))
+                                .font(.system(size: 16, weight: .bold))
 
                             Text(DrunkenUtil().getPunishment(card: self.viewModel.card))
-                                .font(.system(size: 16, weight: .medium, design: .serif))
+                                .font(.system(size: 16, weight: .medium))
                                 .frame(alignment: .leading)
                         }
                     }

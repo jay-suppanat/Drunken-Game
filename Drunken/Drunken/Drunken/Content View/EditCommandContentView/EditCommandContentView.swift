@@ -21,7 +21,7 @@ struct EditCommandContentView: View {
             // MARK: List Content
             List(0 ..< Constants.Command.commandArray.count, id: \.self) { index in
                 EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
-                    .listRowBackground(Color.blackColor.opacity(0.5))
+                    .listRowBackground(Color.darkGrayColor.opacity(0.5))
             }
             .setupListView()
         }
