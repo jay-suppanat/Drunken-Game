@@ -54,19 +54,32 @@ struct GameViewContentView: View {
                         }
 
                         // MARK: Edit Command Button
-                        Button {
-                            self.isGoToEditView = true
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                        }
-                        .navigationDestination(isPresented: self.$isGoToEditView) {
-                            EditCommandContentView(viewModel: EditCommandViewModel())
-                        }
-                        .disabled(!self.viewModel.isCanEditCommand)
-                        .onAppear {
-                            self.isGoToEditView = false
+                        ZStack {
+                            Button {
+                                self.isGoToEditView = true
+                            } label: {
+                                Image(systemName: "pencil.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .tint(self.viewModel.isCanEditCommand ? Color.blackColor : Color.redColor)
+                            }
+                            .navigationDestination(isPresented: self.$isGoToEditView) {
+                                EditCommandContentView(viewModel: EditCommandViewModel())
+                            }
+                            .onAppear {
+                                self.isGoToEditView = false
+                            }
+
+                            if !self.viewModel.isCanEditCommand {
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(width: 30, height: 30)
+                            } else {
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(width: 30, height: 30)
+                                    .hidden()
+                            }
                         }
                     }
                     .tint(Color.blackColor)
