@@ -38,7 +38,7 @@ struct GameViewContentView: View {
                         Button {
                             self.viewModel.touchResetButton()
                         } label: {
-                            Image(systemName: "repeat.circle.fill")
+                            Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)

@@ -24,4 +24,20 @@ extension PunishmentListViewModel: Logic {
     public func resetPunishment() {
         DrunkenUtil().resetPunishment()
     }
+
+    public func getPunishmentCount() -> Int {
+        return self.allCommandPublished.count
+    }
+
+    public func getPunishmentTitleCount() -> Int {
+        return self.allCommandTitlePublished.count
+    }
+
+    public func getPunishmentAtIndex(_ index: Int) -> String {
+        return self.allCommandPublished[index]
+    }
+
+    public func getPunishmentTitleAtIndex(_ index: Int) -> String {
+        return self.allCommandTitlePublished[index]
+    }
 }

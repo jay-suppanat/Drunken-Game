@@ -29,7 +29,7 @@ struct PunishmentListContentView: View {
                         self.viewModel.resetPunishment()
                     } label: {
                         HStack {
-                            Image(systemName: "arrow.clockwise.circle.fill")
+                            Image(systemName: "arrow.counterclockwise.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .trailing)
                                 .tint(Color.white)
@@ -50,11 +50,14 @@ struct PunishmentListContentView: View {
                 }
 
                 // MARK: List Content
-                List(0 ..< Constants.Command.commandArray.count, id: \.self) { index in
-                    EditCommandCell(card: Constants.Command.commandTitleArray[index], command: Constants.Command.commandArray[index])
-                        .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                if self.viewModel.getPunishmentCount() == self.viewModel.getPunishmentTitleCount() {
+                    List(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
+                        EditCommandCell(card: self.viewModel.getPunishmentTitleAtIndex(index),
+                                        command: self.viewModel.getPunishmentAtIndex(index))
+                            .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                    }
+                    .setupListView()
                 }
-                .setupListView()
             }
             .padding(.horizontal)
         }
