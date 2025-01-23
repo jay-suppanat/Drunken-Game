@@ -16,22 +16,30 @@ struct GameViewContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.orange
+                // MARK: Background Color
+                Color.backgroundColor
                     .ignoresSafeArea()
 
                 VStack(spacing: 130) {
                     HStack {
+
+                        Button {
+                            // Action open side menu
+                        } label: {
+                            Image(systemName: "list.bullet.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
+
                         Spacer()
 
                         // MARK: Reset Button
-
                         Button {
                             self.viewModel.touchResetButton()
                         } label: {
                             Image(systemName: "repeat.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                                .tint(Color.blackColor)
                         }
                         .alert("Game End", isPresented: self.$viewModel.isShowAlert) {
                             Button("Restart") {
@@ -46,14 +54,12 @@ struct GameViewContentView: View {
                         }
 
                         // MARK: Edit Command Button
-
                         Button {
                             self.isGoToEditView = true
                         } label: {
                             Image(systemName: "pencil.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                                .tint(Color.blackColor)
                         }
                         .navigationDestination(isPresented: self.$isGoToEditView) {
                             EditCommandContentView(viewModel: EditCommandViewModel())
@@ -63,12 +69,12 @@ struct GameViewContentView: View {
                             self.isGoToEditView = false
                         }
                     }
+                    .tint(Color.blackColor)
                     .padding(.horizontal)
 
                     HStack {
                         ZStack {
                             // MARK: Slide Card View
-
                             Image(AssetsManager.backCard.rawValue)
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
