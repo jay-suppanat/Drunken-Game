@@ -8,16 +8,13 @@
 import SwiftUI
 
 struct AnimationBackgroundContentView: View {
-    @State private var startPoint = UnitPoint.topLeading
-    @State private var endPoint = UnitPoint.bottomTrailing
-
-    public var colorArrays: [Color]
+    @StateObject private var viewModel: AnimationBackgroundViewModel
 
     var body: some View {
         LinearGradient(
-            gradient: Gradient(colors: self.colorArrays),
-            startPoint: startPoint,
-            endPoint: endPoint
+            gradient: Gradient(colors: self.viewModel.getColorArray()),
+            startPoint: self.viewModel.getStartingPoint(),
+            endPoint: self.viewModel.getEndingPoint()
         )
         .ignoresSafeArea()
         .onAppear {
