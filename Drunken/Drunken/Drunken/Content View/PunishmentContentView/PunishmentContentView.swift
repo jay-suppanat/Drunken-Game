@@ -13,8 +13,7 @@ struct PunishmentContentView: View {
 
     var body: some View {
         ZStack {
-            Color.backgroundColor
-                .ignoresSafeArea()
+            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
             VStack {
                 Button {

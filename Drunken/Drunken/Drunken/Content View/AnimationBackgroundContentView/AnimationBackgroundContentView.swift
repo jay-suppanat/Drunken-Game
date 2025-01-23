@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimationBackgroundContentView: View {
-    @StateObject private var viewModel: AnimationBackgroundViewModel
+    @StateObject var viewModel: AnimationBackgroundViewModel
 
     var body: some View {
         LinearGradient(
@@ -27,5 +27,5 @@ struct AnimationBackgroundContentView: View {
 }
 
 #Preview {
-    AnimationBackgroundContentView(colorArrays: [Color.blackColor])
+//    AnimationBackgroundContentView(colorArrays: [Color.blackColor])
 }

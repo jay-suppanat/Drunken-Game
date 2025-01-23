@@ -17,9 +17,7 @@ struct GameViewContentView: View {
         NavigationStack {
             ZStack {
                 // MARK: Background Color
-                AnimationBackgroundContentView(colorArrays: [
-                    Color.blackColor
-                ])
+                AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
                 VStack(spacing: 175) {
                     HStack {

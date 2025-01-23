@@ -17,7 +17,7 @@ struct PunishmentListContentView: View {
     var body: some View {
         ZStack {
             // MARK: Background View
-            AnimationBackgroundContentView(colorArrays: [Color.backgroundColor])
+            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
             VStack {
                 // MARK: Reset Button
