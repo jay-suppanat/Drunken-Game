@@ -16,6 +16,7 @@ struct GameViewContentView: View {
     @State private var isOpenCard: Bool = false
     @State private var isOpenEditPunishmentView: Bool = false
     @State private var isOpenSideMenu: Bool = false
+    @State private var isOpenPurchaseView: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -144,6 +145,9 @@ struct GameViewContentView: View {
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                         .tint(Color.whiteColor)
+                                }
+                                .navigationDestination(isPresented: self.$isOpenPurchaseView) {
+                                    PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: self.$isOpenPurchaseView)
                                 }
                             }
                         }

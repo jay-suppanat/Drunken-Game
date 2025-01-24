@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct PurchaseContentView: View {
+    @StateObject public var viewModel: PurchaseViewModel
+
+    // Action
+    @Binding public var isOpenPurchaseView: Bool
+
     var body: some View {
         Text("Purchase Content View")
     }
 }
 
 #Preview {
-    PurchaseContentView()
+    PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: true)
 }
