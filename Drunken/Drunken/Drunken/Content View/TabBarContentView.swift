@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-enum GameSelected {
-    case doraemonCardGame
-    case rotateBottle
-}
-
 // MARK: TabBarContentView
 
 struct TabBarContentView: View {
-    @State private var gameSelected: GameSelected = .doraemonCardGame
     @State private var isShowSideMenu: Bool = true
 
     // Environment
@@ -26,10 +20,22 @@ struct TabBarContentView: View {
 
     var body: some View {
         ZStack {
-            DoraemonGameContentView()
+            switch self.appEnvironment.gameSelectedIndex {
+            case 0:
+                DoraemonGameContentView()
+            case 1:
+                Text("asd")
+            default:
+                Text("Sorry, this game will launch soon.")
+                    .font(Font.lazyDog25)
+                    .foregroundStyle(Color.redColor)
+            }
 
             if self.appEnvironment.isShowGameListMenu {
-                VStack {
+                EmptyView()
+                    .ignoresSafeArea()
+
+                VStack(spacing: 15) {
                     HStack {
                         Button {
                             self.isOpenGameList.toggle()
@@ -42,13 +48,22 @@ struct TabBarContentView: View {
 
                                 VStack {
                                     Text("Game List")
-                                        .font(Font.lazyDog14)
+                                        .font(Font.lazyDog16)
                                         .foregroundStyle(Color.whiteColor)
                                 }
                             }
                         }
 
                         Spacer()
+                    }
+
+                    if self.isOpenGameList {
+                        ScrollView {
+                            ForEach(0 ..< UserDefaultManager.shared.getGameList().list.count, id: \.self) { index in
+                                GameListCell(data: UserDefaultManager.shared.getGameList().list[index],
+                                             index: index)
+                            }
+                        }
                     }
 
                     Spacer()
@@ -63,8 +78,29 @@ struct TabBarContentView: View {
 // MARK: GameListCell
 
 struct GameListCell: View {
+    var data: GameListElement
+    var index: Int
+
+    // Environment
+    @EnvironmentObject private var appEnvironment: EnvironmentManager
+
     var body: some View {
-        Text("Game List Cell")
+        ZStack {
+            HStack {
+                Button {
+                    self.appEnvironment.gameSelectedIndex = self.index
+                } label: {
+                    Text("\(self.index + 1). \(self.data.gameName)")
+                        .font(Font.lazyDog16)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                }
+                .background(Color.whiteColor)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                Spacer()
+            }
+        }
     }
 }
 

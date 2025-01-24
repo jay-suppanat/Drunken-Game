@@ -9,4 +9,5 @@ import Foundation
 
 class EnvironmentManager: ObservableObject {
     @Published public var isShowGameListMenu: Bool = true
+    @Published public var gameSelectedIndex: Int = 0
 }

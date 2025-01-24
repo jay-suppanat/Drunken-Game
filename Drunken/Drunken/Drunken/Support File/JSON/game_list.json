@@ -1,10 +1,13 @@
 {
+    "id": 0,
     "list": [
         {
+            "id": 0,
             "game": "doraemon",
             "gameName": "Doraemon Card"
         },
         {
+            "id": 1,
             "game": "bottleSpin",
             "gameName": "Bottle Spin"
         }

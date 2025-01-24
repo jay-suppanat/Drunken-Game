@@ -14,7 +14,7 @@ enum APIRouter: Routers {
         case .settingMenuList:
             return "setting_menu_list.json"
         case .gameList:
-            return "game_list"
+            return "game_list.json"
         }
     }
 }

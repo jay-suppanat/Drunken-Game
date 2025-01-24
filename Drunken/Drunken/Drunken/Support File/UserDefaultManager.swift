@@ -38,7 +38,7 @@ class UserDefaultManager {
         }
     }
 
-    public func getCommand2() -> GameListModel {
+    public func getGameList() -> GameListModel {
         guard let data = UserDefaults.standard.data(forKey: self.gameListKey) else {
             return GameListModel()
         }
