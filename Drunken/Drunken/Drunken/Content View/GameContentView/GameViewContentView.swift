@@ -21,7 +21,7 @@ struct GameViewContentView: View {
                 AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
                 VStack(spacing: 175) {
-                    HStack(spacing: self.viewModel.isCanEditCommand ? 10 : 0) {
+                    HStack(spacing: self.viewModel.getGameStatus() == .start ? 0 : 10) {
                         Spacer()
 
                         // MARK: Reset Button
@@ -33,7 +33,7 @@ struct GameViewContentView: View {
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)
                         }
-                        .alert("Would you like to restart?", isPresented: self.$viewModel.isShowAlert) {
+                        .alert("Would you like to restart?", isPresented: self.viewModel.getShowResetAlertStatus()) {
                             Button("Restart") {
                                 self.viewModel.fillCard()
                             }
@@ -50,7 +50,8 @@ struct GameViewContentView: View {
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
-                                    .frame(width: !self.viewModel.isCanEditCommand ? 0 : 30, height: 30)
+                                    .frame(width: self.viewModel.getGameStatus() == .start ? 0 : 30, height: 30)
+                                    .tint(Color.whiteColor)
                             }
                             .navigationDestination(isPresented: self.$isGoToEditView) {
                                 PunishmentListContentView(viewModel: PunishmentListViewModel())
@@ -94,10 +95,10 @@ struct GameViewContentView: View {
                             self.isOpen.toggle()
                         }
                     }, content: {
-                        PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
+                        PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.getCard()),
                                            isDismiss: self.$isShowCommand)
                     })
-                    .alert("Would you like to restart the game?", isPresented: self.$viewModel.isGameEnd) {
+                    .alert("Game End", isPresented: self.viewModel.getShowResetAlertStatus()) {
                         Button("Restart") {
                             self.viewModel.fillCard()
                         }
@@ -105,6 +106,8 @@ struct GameViewContentView: View {
                         Button("Cancel", role: .cancel) {
                             self.viewModel.touchCancelAlertButton()
                         }
+                    } message: {
+                        Text("Would you like to restart the game?")
                     }
 
                     Spacer()

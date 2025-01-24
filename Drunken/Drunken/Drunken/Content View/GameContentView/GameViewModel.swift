@@ -6,18 +6,29 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum SideButtonMenuAction {
+// MARK: SideButtonMenuAction
+
+enum SideMenuButtonAction {
     case setting
     case removeAds
     case info
+    case noAction
+}
+
+// MARK: GameStatus
+
+enum GameStatus {
+    case start
+    case end
 }
 
 class GameViewModel: ObservableObject {
-    @Published public var card: String = ""
-    @Published public var isGameEnd: Bool = false
-    @Published public var isCanEditCommand: Bool = true
-    @Published public var isShowAlert: Bool = false
+    @Published private var cardPublished: String = ""
+    @Published private var gameStatusPublished: GameStatus = .end
+    @Published private var sideMenuActionPublished: SideMenuButtonAction = .noAction
+    @Published private var showResetGameAlertPublished: Bool = false
 
     init() {}
 
@@ -47,11 +58,11 @@ class GameViewModel: ObservableObject {
 
 extension GameViewModel: Logic {
     public func randomCard() {
-        self.isCanEditCommand = false
+        self.gameStatusPublished = .start
 
         if self.cardDeck.kingCard.isEmpty {
-            self.isShowAlert = true
-            self.isGameEnd = true
+//            self.isShowAlert = true
+            self.gameStatusPublished = .end
         } else {
             guard let index = (0..<self.cardDeck.cardDeck.count).randomElement() else { return }
             let randomCard = self.cardDeck.cardDeck[index]
@@ -62,11 +73,10 @@ extension GameViewModel: Logic {
 
             self.cardDeck.cardDeck.remove(at: index)
 
-            print("Remain Card: \(self.cardDeck.cardDeck.count)")
+            print("Remain Card Deck: \(self.cardDeck.cardDeck.count)")
             print("Remain King Card: \(self.cardDeck.kingCard.count)")
 
-            self.isGameEnd = false
-            self.card = randomCard
+            self.cardPublished = randomCard
         }
     }
 
@@ -77,20 +87,47 @@ extension GameViewModel: Logic {
         print("Fill Card Deck: \(self.cardDeck.cardDeck.count)")
         print("Fill King Card: \(self.cardDeck.kingCard.count)")
 
-        self.isCanEditCommand = true
-        self.isShowAlert = false
-        self.isGameEnd = false
+        self.showResetGameAlertPublished = false
+        self.gameStatusPublished = .end
     }
+}
 
+// MARK: Get
+
+extension GameViewModel: Get {
     public func getAnimationTime() -> TimeInterval {
         return 0.2
     }
 
+    public func getGameStatus() -> GameStatus {
+        return self.gameStatusPublished
+    }
+
+    public func getSideMenuAction() -> SideMenuButtonAction {
+        return self.sideMenuActionPublished
+    }
+
+    public func getShowResetAlertStatus() -> Binding<Bool> {
+        return Binding {
+            self.showResetGameAlertPublished
+        } set: { isShow in
+            self.showResetGameAlertPublished = isShow
+        }
+    }
+
+    public func getCard() -> String {
+        return self.cardPublished
+    }
+}
+
+// MARK: Action
+
+extension GameViewModel: Action {
     public func touchCancelAlertButton() {
-        self.isGameEnd = false
+        self.showResetGameAlertPublished = false
     }
 
     public func touchResetButton() {
-        self.isShowAlert = true
+        self.showResetGameAlertPublished = true
     }
 }
