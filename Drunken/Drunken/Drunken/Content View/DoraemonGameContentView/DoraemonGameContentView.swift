@@ -11,6 +11,9 @@ import GoogleMobileAds
 struct DoraemonGameContentView: View {
     @StateObject private var viewModel: DoraemonGameViewModel = .init()
 
+    // Environment
+    @EnvironmentObject private var appEnvironment: EnvironmentManager
+
     // Action State
     @State private var isShowPunishment: Bool = false
     @State private var isOpenCard: Bool = false
@@ -51,6 +54,7 @@ struct DoraemonGameContentView: View {
                         // MARK: Edit Command Button
                         ZStack {
                             Button {
+                                self.appEnvironment.isShowGameListMenu = false
                                 self.isOpenEditPunishmentView = true
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
@@ -62,6 +66,7 @@ struct DoraemonGameContentView: View {
                                 PunishmentListContentView(viewModel: PunishmentListViewModel())
                             }
                             .onAppear {
+                                self.appEnvironment.isShowGameListMenu = true
                                 self.isOpenEditPunishmentView = false
                             }
                         }

@@ -10,6 +10,9 @@ import GoogleMobileAds
 
 @main
 struct DrunkenApp: App {
+
+    @StateObject private var appEnvironment: EnvironmentManager = EnvironmentManager()
+
     init() {
         self.initTabBarAppearance()
         self.initGoogleAds()
@@ -18,6 +21,7 @@ struct DrunkenApp: App {
     var body: some Scene {
         WindowGroup {
             TabBarContentView()
+                .environmentObject(self.appEnvironment)
         }
     }
 

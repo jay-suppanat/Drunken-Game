@@ -16,6 +16,10 @@ enum GameSelected {
 
 struct TabBarContentView: View {
     @State private var gameSelected: GameSelected = .doraemonCardGame
+    @State private var isShowSideMenu: Bool = true
+
+    // Environment
+    @EnvironmentObject private var appEnvironment: EnvironmentManager
 
     // Action
     @State private var isOpenGameList: Bool = false
@@ -24,32 +28,34 @@ struct TabBarContentView: View {
         ZStack {
             DoraemonGameContentView()
 
-            VStack {
-                HStack {
-                    Button {
-                        self.isOpenGameList.toggle()
-                    } label: {
-                        HStack {
-                            Image(systemName: "arrow.left.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .tint(Color.yellowColor)
+            if self.appEnvironment.isShowGameListMenu {
+                VStack {
+                    HStack {
+                        Button {
+                            self.isOpenGameList.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "arrow.left.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .tint(Color.yellowColor)
 
-                            VStack {
-                                Text("Game List")
-                                    .font(Font.lazyDog14)
-                                    .foregroundStyle(Color.whiteColor)
+                                VStack {
+                                    Text("Game List")
+                                        .font(Font.lazyDog14)
+                                        .foregroundStyle(Color.whiteColor)
+                                }
                             }
                         }
+
+                        Spacer()
                     }
 
                     Spacer()
                 }
-
-                Spacer()
+                .padding(.horizontal)
+                .padding(.top, 20)
             }
-            .padding(.horizontal)
-            .padding(.top, 20)
         }
     }
 }
