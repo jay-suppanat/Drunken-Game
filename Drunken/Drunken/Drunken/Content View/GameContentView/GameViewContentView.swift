@@ -16,7 +16,6 @@ struct GameViewContentView: View {
     @State private var isOpenCard: Bool = false
     @State private var isOpenEditPunishmentView: Bool = false
     @State private var isOpenSideMenu: Bool = false
-    @State private var isOpenPurchaseView: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -24,7 +23,7 @@ struct GameViewContentView: View {
                 // MARK: Background Color
                 AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
-                VStack(spacing: 175) {
+                VStack {
                     HStack(spacing: self.viewModel.isCanEditCommand ? 10 : 0) {
                         Spacer()
 
@@ -69,6 +68,8 @@ struct GameViewContentView: View {
                     }
                     .tint(Color.blackColor)
                     .padding(.horizontal)
+
+                    Spacer()
 
                     HStack {
                         ZStack {
@@ -115,69 +116,18 @@ struct GameViewContentView: View {
                     }
 
                     Spacer()
+
+                    VStack {
+                        ZStack {
+                            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
+                                .frame(width: UIScreen.main.bounds.width, height: GADAdSizeBanner.size.height)
+
+                            GoogleAdsManager()
+                                .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                        }
+                    }
                 }
                 .padding(.top, 20)
-
-                // MARK: Side Menu Button
-                VStack(spacing: 20) {
-                    Spacer()
-
-                    HStack {
-                        Spacer()
-
-                        if self.isOpenSideMenu {
-                            HStack {
-                                // MARK: Info Button
-                                Button {
-                                    // Setting
-                                } label: {
-                                    Image(systemName: "info.circle.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .tint(Color.whiteColor)
-                                }
-
-                                // MARK: Remove Ads Button
-                                Button {
-                                    self.isOpenPurchaseView.toggle()
-                                } label: {
-                                    Image(systemName: "cart.circle.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .tint(Color.whiteColor)
-                                }
-                                .navigationDestination(isPresented: self.$isOpenPurchaseView) {
-                                    PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: self.$isOpenPurchaseView)
-                                }
-                                .onAppear {
-                                    self.isOpenPurchaseView = false
-                                }
-                            }
-                        }
-
-                        // MARK: Side Menu Button
-                        Button {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                self.isOpenSideMenu.toggle()
-                            }
-                        } label: {
-                            Image(systemName: self.isOpenSideMenu ? "chevron.left.circle.fill" : "list.bullet.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .tint(self.isOpenSideMenu ? Color.yellowColor : Color.whiteColor)
-                        }
-                        .frame(alignment: .leading)
-                    }
-                    .padding(.horizontal)
-
-                    ZStack {
-                        AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
-                            .frame(width: UIScreen.main.bounds.width, height: GADAdSizeBanner.size.height)
-
-                        GoogleAdsManager()
-                            .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
-                    }
-                }
             }
             .toolbarVisibility(.hidden, for: .navigationBar)
         }
