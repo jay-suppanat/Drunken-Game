@@ -1,0 +1,25 @@
+{
+    "id": 0,
+    "list": [
+        {
+            "id": 1,
+            "game": "doraemon",
+            "gameName": "Doraemon Card"
+        },
+        {
+            "id": 2,
+            "game": "bottleSpin",
+            "gameName": "Bottle Spin"
+        },
+        {
+            "id": 3,
+            "game": "setting",
+            "gameName": "Setting"
+        },
+        {
+            "id": 4,
+            "game": "info",
+            "gameName": "Info"
+        }
+    ]
+}

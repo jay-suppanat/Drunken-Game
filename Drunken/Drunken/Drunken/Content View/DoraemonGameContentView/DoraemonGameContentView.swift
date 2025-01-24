@@ -54,7 +54,7 @@ struct DoraemonGameContentView: View {
                         // MARK: Edit Command Button
                         ZStack {
                             Button {
-                                self.appEnvironment.isShowGameListMenu = false
+                                self.appEnvironment.isShowMenuList = false
                                 self.isOpenEditPunishmentView = true
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
@@ -66,7 +66,7 @@ struct DoraemonGameContentView: View {
                                 PunishmentListContentView(viewModel: PunishmentListViewModel())
                             }
                             .onAppear {
-                                self.appEnvironment.isShowGameListMenu = true
+                                self.appEnvironment.isShowMenuList = true
                                 self.isOpenEditPunishmentView = false
                             }
                         }

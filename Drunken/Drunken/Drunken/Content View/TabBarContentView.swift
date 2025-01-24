@@ -16,29 +16,34 @@ struct TabBarContentView: View {
     @EnvironmentObject private var appEnvironment: EnvironmentManager
 
     // Action
-    @State private var isOpenGameList: Bool = false
+    @State private var isOpenMenuList: Bool = false
 
     var body: some View {
         ZStack {
-            switch self.appEnvironment.gameSelectedIndex {
-            case 0:
-                DoraemonGameContentView()
+            switch self.appEnvironment.menuSelectedIndex {
             case 1:
+                DoraemonGameContentView()
+            case 2:
                 Text("asd")
             default:
-                Text("Sorry, this game will launch soon.")
+                Text("Sorry, This menu is not available now.")
+                    .multilineTextAlignment(.center)
                     .font(Font.lazyDog25)
                     .foregroundStyle(Color.redColor)
             }
 
-            if self.appEnvironment.isShowGameListMenu {
-                EmptyView()
+            if self.isOpenMenuList {
+                Color.black.opacity(0.4)
                     .ignoresSafeArea()
+            }
 
+            if self.appEnvironment.isShowMenuList {
                 VStack(spacing: 15) {
                     HStack {
                         Button {
-                            self.isOpenGameList.toggle()
+                            withAnimation {
+                                self.isOpenMenuList.toggle()
+                            }
                         } label: {
                             HStack {
                                 Image(systemName: "list.bullet.circle.fill")
@@ -46,8 +51,8 @@ struct TabBarContentView: View {
                                     .frame(width: 30, height: 30)
                                     .tint(Color.yellowColor)
 
-                                VStack {
-                                    Text("Game List")
+                                if self.isOpenMenuList {
+                                    Text("Menu")
                                         .font(Font.lazyDog16)
                                         .foregroundStyle(Color.whiteColor)
                                 }
@@ -57,13 +62,14 @@ struct TabBarContentView: View {
                         Spacer()
                     }
 
-                    if self.isOpenGameList {
+                    if self.isOpenMenuList {
                         ScrollView {
                             ForEach(0 ..< UserDefaultManager.shared.getGameList().list.count, id: \.self) { index in
-                                GameListCell(data: UserDefaultManager.shared.getGameList().list[index],
-                                             index: index)
+                                GameListCell(data: UserDefaultManager.shared.getGameList().list[index])
                             }
                         }
+                        .transition(.move(edge: .leading))
+                        .animation(.smooth, value: self.isOpenMenuList)
                     }
 
                     Spacer()
@@ -79,7 +85,6 @@ struct TabBarContentView: View {
 
 struct GameListCell: View {
     var data: GameListElement
-    var index: Int
 
     // Environment
     @EnvironmentObject private var appEnvironment: EnvironmentManager
@@ -88,12 +93,21 @@ struct GameListCell: View {
         ZStack {
             HStack {
                 Button {
-                    self.appEnvironment.gameSelectedIndex = self.index
+                    self.appEnvironment.menuSelectedIndex = self.data.id
                 } label: {
-                    Text("\(self.index + 1). \(self.data.gameName)")
-                        .font(Font.lazyDog16)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 6)
+                    switch self.data.game {
+                    case "setting", "info":
+                        Text("\(self.data.id). \(self.data.gameName)")
+                            .font(Font.lazyDog16)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                            .foregroundStyle(Color.blackColor)
+                    default:
+                        Text("\(self.data.id). \(self.data.gameName)")
+                            .font(Font.lazyDog16)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                    }
                 }
                 .background(Color.whiteColor)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
