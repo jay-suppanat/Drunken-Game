@@ -173,8 +173,13 @@ struct GameViewContentView: View {
                     }
                     .padding(.horizontal)
 
-                    GoogleAdsManager()
-                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                    ZStack {
+                        AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
+                            .frame(width: UIScreen.main.bounds.width, height: GADAdSizeBanner.size.height)
+
+                        GoogleAdsManager()
+                            .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                    }
                 }
             }
             .toolbarVisibility(.hidden, for: .navigationBar)

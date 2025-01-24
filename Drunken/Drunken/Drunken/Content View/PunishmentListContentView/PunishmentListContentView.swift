@@ -116,6 +116,7 @@ struct EditCommandAlert: View {
                 // MARK: Punishment Text
                 Text(self.command)
                     .frame(alignment: .center)
+                    .foregroundStyle(Color.whiteColor)
 
                 // MARK: Text Editor
                 TextEditor(text: self.$newCommand)
