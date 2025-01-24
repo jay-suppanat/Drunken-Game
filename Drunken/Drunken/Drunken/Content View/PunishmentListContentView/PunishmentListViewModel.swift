@@ -9,13 +9,7 @@ import Foundation
 import SwiftUI
 
 class PunishmentListViewModel: ObservableObject {
-    @Published private var allCommandPublished: [String] = []
-    @Published private var allCommandTitlePublished: [String] = []
-
-    init() {
-        self.allCommandPublished = Constants.Command.commandArray
-        self.allCommandTitlePublished = Constants.Command.commandTitleArray
-    }
+    init() {}
 }
 
 // MARK: Logic
@@ -26,18 +20,18 @@ extension PunishmentListViewModel: Logic {
     }
 
     public func getPunishmentCount() -> Int {
-        return self.allCommandPublished.count
+        return Constants.Command.commandArray.count
     }
 
     public func getPunishmentTitleCount() -> Int {
-        return self.allCommandTitlePublished.count
+        return Constants.Command.commandTitleArray.count
     }
 
     public func getPunishmentAtIndex(_ index: Int) -> String {
-        return self.allCommandPublished[index]
+        return Constants.Command.commandArray[index]
     }
 
     public func getPunishmentTitleAtIndex(_ index: Int) -> String {
-        return self.allCommandTitlePublished[index]
+        return Constants.Command.commandTitleArray[index]
     }
 }

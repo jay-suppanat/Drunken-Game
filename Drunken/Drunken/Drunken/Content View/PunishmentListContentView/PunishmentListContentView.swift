@@ -25,7 +25,6 @@ struct PunishmentListContentView: View {
 
                     Button {
                         self.isShowResetAlert.toggle()
-                        self.viewModel.resetPunishment()
                     } label: {
                         HStack {
                             Image(systemName: "arrow.counterclockwise.circle.fill")
@@ -37,6 +36,7 @@ struct PunishmentListContentView: View {
                     .frame(width: 30, height: 30, alignment: .trailing)
                     .alert("Game End", isPresented: self.$isShowResetAlert) {
                         Button("Reset") {
+                            self.viewModel.resetPunishment()
                             self.isShowResetAlert = false
                         }
 
@@ -69,8 +69,9 @@ struct PunishmentListContentView: View {
 struct EditCommandCell: View {
     @State var card: String
     @State var command: String
+
+    // Action
     @State var isShowEditCommandView: Bool = false
-    @State var newCommand: String = ""
 
     var body: some View {
         Button {
@@ -82,14 +83,9 @@ struct EditCommandCell: View {
                 .tint(Color.textColor)
         }
         .fullScreenCover(isPresented: self.$isShowEditCommandView) {
-            if !self.newCommand.isEmpty {
-                self.command = self.newCommand
-            }
         } content: {
             EditCommandAlert(card: self.card,
-                             command: self.command,
-                             isShowEditCommandView: self.$isShowEditCommandView,
-                             newCommand: self.$newCommand)
+                             isShowEditCommandView: self.$isShowEditCommandView)
         }
     }
 
@@ -102,9 +98,8 @@ struct EditCommandCell: View {
 
 struct EditCommandAlert: View {
     @State var card: String
-    @State var command: String
     @Binding var isShowEditCommandView: Bool
-    @Binding var newCommand: String
+    @State var newCommand: String = ""
 
     var body: some View {
         ZStack {
@@ -114,7 +109,7 @@ struct EditCommandAlert: View {
             VStack(spacing: 30) {
 
                 // MARK: Punishment Text
-                Text(self.command)
+                Text(DrunkenUtil().getPunishment(card: self.card))
                     .frame(alignment: .center)
                     .foregroundStyle(Color.whiteColor)
 
@@ -129,9 +124,6 @@ struct EditCommandAlert: View {
                     }
                     .foregroundStyle(Color.whiteColor)
                     .scrollContentBackground(.hidden)
-                    .onDisappear {
-                        self.newCommand = ""
-                    }
 
                 HStack(spacing: 50) {
                     Spacer()
@@ -173,10 +165,7 @@ struct EditCommandAlert: View {
     }
 
     private func touchSubmit() {
-        if self.checkIsChangeCommand() {
-            DrunkenUtil().setPunishment(card: self.card, newCommand: self.newCommand)
-        }
-
+        DrunkenUtil().setPunishment(card: self.card, newCommand: self.newCommand)
         self.isShowEditCommandView = false
     }
 
