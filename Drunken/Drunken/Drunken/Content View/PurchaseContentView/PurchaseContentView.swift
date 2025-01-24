@@ -14,10 +14,22 @@ struct PurchaseContentView: View {
     @Binding public var isOpenPurchaseView: Bool
 
     var body: some View {
-        Text("Purchase Content View")
+        ZStack {
+            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
+
+            VStack {
+                // MARK: Remove Ads Button
+                Button {
+                    // Call Store Kit API
+                } label: {
+                    Text("Purchase Content View")
+                }
+            }
+            .setupNavigationBar(title: "Remove Ads")
+        }
     }
 }
 
 #Preview {
-    PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: true)
+//    PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: $true)
 }

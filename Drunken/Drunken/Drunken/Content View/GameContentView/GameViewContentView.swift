@@ -139,7 +139,7 @@ struct GameViewContentView: View {
 
                                 // MARK: Remove Ads Button
                                 Button {
-                                    // Remove Ads
+                                    self.isOpenPurchaseView.toggle()
                                 } label: {
                                     Image(systemName: "cart.circle.fill")
                                         .resizable()
@@ -148,6 +148,9 @@ struct GameViewContentView: View {
                                 }
                                 .navigationDestination(isPresented: self.$isOpenPurchaseView) {
                                     PurchaseContentView(viewModel: PurchaseViewModel(), isOpenPurchaseView: self.$isOpenPurchaseView)
+                                }
+                                .onAppear {
+                                    self.isOpenPurchaseView = false
                                 }
                             }
                         }
