@@ -126,7 +126,7 @@ struct GameViewContentView: View {
 
                         if self.isOpenSideMenu {
                             HStack {
-                                // MARK: Setting Button
+                                // MARK: Info Button
                                 Button {
                                     // Setting
                                 } label: {
@@ -141,16 +141,6 @@ struct GameViewContentView: View {
                                     // Remove Ads
                                 } label: {
                                     Image(systemName: "cart.circle.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .tint(Color.whiteColor)
-                                }
-
-                                // MARK: Info Button
-                                Button {
-                                    // Info
-                                } label: {
-                                    Image(systemName: "gearshape.circle.fill")
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                         .tint(Color.whiteColor)
