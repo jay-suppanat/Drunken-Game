@@ -19,14 +19,6 @@ protocol Service {}
 
 protocol Logic {}
 
-// MARK: Get
-
-protocol Get {}
-
-// MARK: Action
-
-protocol Action {}
-
 // MARK: AppUtil
 
 protocol AppUtil {
