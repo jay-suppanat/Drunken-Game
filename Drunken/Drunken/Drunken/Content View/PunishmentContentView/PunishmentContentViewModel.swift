@@ -8,9 +8,17 @@
 import Foundation
 
 class PunishmentContentViewModel: ObservableObject {
-    @Published var card: String
+    @Published private var cardPublished: String
 
     init(card: String) {
-        self.card = card
+        self.cardPublished = card
+    }
+}
+
+// MARK: Get
+
+extension PunishmentContentViewModel: Get {
+    public func getCard() -> String {
+        return self.cardPublished
     }
 }

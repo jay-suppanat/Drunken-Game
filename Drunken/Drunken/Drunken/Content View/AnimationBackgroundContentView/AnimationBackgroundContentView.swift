@@ -12,9 +12,9 @@ struct AnimationBackgroundContentView: View {
 
     var body: some View {
         LinearGradient(
-            gradient: Gradient(colors: self.viewModel.getColorArray()),
-            startPoint: self.viewModel.getStartingPoint(),
-            endPoint: self.viewModel.getEndingPoint()
+            gradient: Gradient(colors: self.viewModel.gredientColorsPublished),
+            startPoint: self.viewModel.startingPointPublished,
+            endPoint: self.viewModel.endingPointPublished
         )
         .ignoresSafeArea()
         .onAppear {
@@ -27,5 +27,5 @@ struct AnimationBackgroundContentView: View {
 }
 
 #Preview {
-//    AnimationBackgroundContentView(colorArrays: [Color.blackColor])
+    AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
 }

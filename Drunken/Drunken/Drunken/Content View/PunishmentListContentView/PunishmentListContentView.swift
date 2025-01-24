@@ -11,7 +11,6 @@ import SwiftUI
 
 struct PunishmentListContentView: View {
     @StateObject var viewModel: PunishmentListViewModel
-    @State private var isShowAlert: Bool = false
     @State private var isShowResetAlert: Bool = false
 
     var body: some View {
@@ -70,7 +69,7 @@ struct PunishmentListContentView: View {
 struct EditCommandCell: View {
     @State var card: String
     @State var command: String
-    @State var isShowAlert: Bool = false
+    @State var isShowEditCommandView: Bool = false
     @State var newCommand: String = ""
 
     var body: some View {
@@ -82,17 +81,20 @@ struct EditCommandCell: View {
                 .frame(alignment: .leading)
                 .tint(Color.textColor)
         }
-        .fullScreenCover(isPresented: self.$isShowAlert) {
+        .fullScreenCover(isPresented: self.$isShowEditCommandView) {
             if !self.newCommand.isEmpty {
                 self.command = self.newCommand
             }
         } content: {
-            EditCommandAlert(card: self.card, command: self.command, isShowAlret: self.$isShowAlert, newCommand: self.$newCommand)
+            EditCommandAlert(card: self.card,
+                             command: self.command,
+                             isShowEditCommandView: self.$isShowEditCommandView,
+                             newCommand: self.$newCommand)
         }
     }
 
     private func touchCell() {
-        self.isShowAlert.toggle()
+        self.isShowEditCommandView.toggle()
     }
 }
 
@@ -101,7 +103,7 @@ struct EditCommandCell: View {
 struct EditCommandAlert: View {
     @State var card: String
     @State var command: String
-    @Binding var isShowAlret: Bool
+    @Binding var isShowEditCommandView: Bool
     @Binding var newCommand: String
 
     var body: some View {
@@ -110,9 +112,12 @@ struct EditCommandAlert: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 30) {
+
+                // MARK: Punishment Text
                 Text(self.command)
                     .frame(alignment: .center)
 
+                // MARK: Text Editor
                 TextEditor(text: self.$newCommand)
                     .frame(height: 150)
                     .background(Color.darkGrayColor)
@@ -130,7 +135,7 @@ struct EditCommandAlert: View {
                 HStack(spacing: 50) {
                     Spacer()
 
-                    // Cancel Button
+                    // MARK: Cancel Button
                     Button {
                         self.touchCancel()
                     } label: {
@@ -142,7 +147,7 @@ struct EditCommandAlert: View {
                     .background(Color.redColor)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                    // Submit Button
+                    // MARK: Submit Button
                     Button {
                         self.touchSubmit()
                     } label: {
@@ -163,7 +168,7 @@ struct EditCommandAlert: View {
     }
 
     private func touchCancel() {
-        self.isShowAlret = false
+        self.isShowEditCommandView = false
     }
 
     private func touchSubmit() {
@@ -171,7 +176,7 @@ struct EditCommandAlert: View {
             DrunkenUtil().setPunishment(card: self.card, newCommand: self.newCommand)
         }
 
-        self.isShowAlret = false
+        self.isShowEditCommandView = false
     }
 
     private func checkIsChangeCommand() -> Bool {

@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 class PunishmentListViewModel: ObservableObject {
-    @Published public var allCommandPublished: [String] = []
-    @Published public var allCommandTitlePublished: [String] = []
+    @Published private var allCommandPublished: [String] = []
+    @Published private var allCommandTitlePublished: [String] = []
 
     init() {
         self.allCommandPublished = Constants.Command.commandArray

@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum SideButtonMenuAction {
-    case setting
-    case removeAds
-    case info
-}
-
 class GameViewModel: ObservableObject {
     @Published public var card: String = ""
     @Published public var isGameEnd: Bool = false

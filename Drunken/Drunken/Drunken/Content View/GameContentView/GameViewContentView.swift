@@ -9,9 +9,11 @@ import SwiftUI
 
 struct GameViewContentView: View {
     @StateObject private var viewModel: GameViewModel = .init()
-    @State private var isOpen: Bool = false
-    @State private var isShowCommand: Bool = false
-    @State private var isGoToEditView: Bool = false
+
+    // Action State
+    @State private var isShowPunishment: Bool = false
+    @State private var isOpenCard: Bool = false
+    @State private var isOpenEditPunishmentView: Bool = false
     @State private var isOpenSideMenu: Bool = false
 
     var body: some View {
@@ -33,30 +35,33 @@ struct GameViewContentView: View {
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)
                         }
-                        .alert("Would you like to restart?", isPresented: self.$viewModel.isShowAlert) {
-                            Button("Restart") {
+                        .alert(Constants.Text.gameEnd, isPresented: self.$viewModel.isShowAlert) {
+                            Button(Constants.Button.restart) {
                                 self.viewModel.fillCard()
                             }
 
-                            Button("Cancel", role: .cancel) {
+                            Button(Constants.Button.cancel, role: .cancel) {
                                 self.viewModel.touchCancelAlertButton()
                             }
+                        } message : {
+                            Text(Constants.Text.restartGameAlert)
                         }
 
                         // MARK: Edit Command Button
                         ZStack {
                             Button {
-                                self.isGoToEditView = true
+                                self.isOpenEditPunishmentView = true
                             } label: {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
                                     .frame(width: !self.viewModel.isCanEditCommand ? 0 : 30, height: 30)
+                                    .tint(Color.whiteColor)
                             }
-                            .navigationDestination(isPresented: self.$isGoToEditView) {
+                            .navigationDestination(isPresented: self.$isOpenEditPunishmentView) {
                                 PunishmentListContentView(viewModel: PunishmentListViewModel())
                             }
                             .onAppear {
-                                self.isGoToEditView = false
+                                self.isOpenEditPunishmentView = false
                             }
                         }
                     }
@@ -72,8 +77,8 @@ struct GameViewContentView: View {
                                 .frame(width: 200, height: 300)
                                 .scaleEffect(1.5)
                                 .aspectRatio(contentMode: .fill)
-                                .offset(y: self.isOpen ? UIScreen.main.bounds.height : 0)
-                                .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
+                                .offset(y: self.isOpenCard ? UIScreen.main.bounds.height : 0)
+                                .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpenCard)
 
                             // MARK: Card View Button
                             Button {
@@ -86,23 +91,23 @@ struct GameViewContentView: View {
                                     .scaleEffect(1.5)
                                     .aspectRatio(contentMode: .fill)
                             }
-                            .disabled(self.isOpen)
+                            .disabled(self.isOpenCard)
                         }
                     }
-                    .fullScreenCover(isPresented: self.$isShowCommand, onDismiss: {
+                    .fullScreenCover(isPresented: self.$isShowPunishment, onDismiss: {
                         DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
-                            self.isOpen.toggle()
+                            self.isOpenCard.toggle()
                         }
                     }, content: {
                         PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
-                                           isDismiss: self.$isShowCommand)
+                                           isDismiss: self.$isShowPunishment)
                     })
-                    .alert("Would you like to restart the game?", isPresented: self.$viewModel.isGameEnd) {
-                        Button("Restart") {
+                    .alert(Constants.Text.restartGameAlert, isPresented: self.$viewModel.isGameEnd) {
+                        Button(Constants.Button.restart) {
                             self.viewModel.fillCard()
                         }
 
-                        Button("Cancel", role: .cancel) {
+                        Button(Constants.Button.cancel, role: .cancel) {
                             self.viewModel.touchCancelAlertButton()
                         }
                     }
@@ -174,12 +179,12 @@ struct GameViewContentView: View {
     }
 
     private func touchCardView() {
-        self.isOpen.toggle()
+        self.isOpenCard.toggle()
         self.viewModel.randomCard()
 
         // Delay equal to animation duration
         DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
-            self.isShowCommand.toggle()
+            self.isShowPunishment.toggle()
         }
     }
 }

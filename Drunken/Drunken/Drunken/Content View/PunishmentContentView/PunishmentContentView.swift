@@ -20,11 +20,11 @@ struct PunishmentContentView: View {
                     self.isDismiss = false
                 } label: {
                     VStack(spacing: 30) {
-                        Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.card))")
+                        Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.getCard()))")
                             .font(.system(size: 30, weight: .bold))
 
                         VStack(spacing: 20) {
-                            Image(self.viewModel.card)
+                            Image(self.viewModel.getCard())
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 14))
                                 .frame(width: 267, height: 400)
@@ -34,7 +34,7 @@ struct PunishmentContentView: View {
                                 Text("Description Punishment")
                                     .font(.system(size: 16, weight: .bold))
 
-                                Text(DrunkenUtil().getPunishment(card: self.viewModel.card))
+                                Text(DrunkenUtil().getPunishment(card: self.viewModel.getCard()))
                                     .font(.system(size: 16, weight: .medium))
                                     .frame(alignment: .leading)
                             }

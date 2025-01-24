@@ -14,11 +14,15 @@ enum Constants {
         static let random = "Random"
         static let cancel = "Cancel"
         static let submit = "Submit"
+        static let reset = "Reset"
+        static let restart = "Restart"
     }
 
     enum Text {
         static let enterNewCommand = "Enter new command."
         static let editCommand = "Edit Command"
+        static let restartGameAlert = "Would you like to restart the game?"
+        static let gameEnd = "Game End"
     }
 
     enum CardDeck {
