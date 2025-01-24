@@ -10,8 +10,6 @@ import SwiftUI
 // MARK: TabBarContentView
 
 struct TabBarContentView: View {
-    @State private var isShowSideMenu: Bool = true
-
     // Environment
     @EnvironmentObject private var appEnvironment: EnvironmentManager
 
@@ -65,7 +63,8 @@ struct TabBarContentView: View {
                     if self.isOpenMenuList {
                         ScrollView {
                             ForEach(0 ..< UserDefaultManager.shared.getGameList().list.count, id: \.self) { index in
-                                GameListCell(data: UserDefaultManager.shared.getGameList().list[index])
+                                GameListCell(data: UserDefaultManager.shared.getGameList().list[index],
+                                             isOpenMenuList: self.$isOpenMenuList)
                             }
                         }
                         .transition(.move(edge: .leading))
@@ -85,6 +84,7 @@ struct TabBarContentView: View {
 
 struct GameListCell: View {
     var data: GameListElement
+    @Binding var isOpenMenuList: Bool
 
     // Environment
     @EnvironmentObject private var appEnvironment: EnvironmentManager
@@ -93,6 +93,9 @@ struct GameListCell: View {
         ZStack {
             HStack {
                 Button {
+                    withAnimation {
+                        self.isOpenMenuList.toggle()
+                    }
                     self.appEnvironment.menuSelectedIndex = self.data.id
                 } label: {
                     switch self.data.game {

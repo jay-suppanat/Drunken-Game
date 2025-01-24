@@ -78,7 +78,7 @@ struct EditCommandCell: View {
             self.touchCell()
         } label: {
             Text("Card \(self.card)")
-                .font(.subheadline)
+                .font(Font.lazyDog16)
                 .frame(alignment: .leading)
                 .tint(Color.textColor)
         }

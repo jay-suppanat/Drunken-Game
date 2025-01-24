@@ -29,6 +29,7 @@ struct NavigationBarModifier: ViewModifier {
                 ToolbarItem(placement: .principal) {
                     Text(self.title)
                         .foregroundStyle(Color.whiteColor)
+                        .font(Font.lazyDog16)
                 }
             })
             .toolbarRole(.editor)
