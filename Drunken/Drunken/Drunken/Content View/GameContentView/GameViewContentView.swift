@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct GameViewContentView: View {
     @StateObject private var viewModel: GameViewModel = .init()
@@ -117,7 +118,7 @@ struct GameViewContentView: View {
                 .padding(.top, 20)
 
                 // MARK: Side Menu Button
-                VStack {
+                VStack(spacing: 20) {
                     Spacer()
 
                     HStack {
@@ -171,8 +172,10 @@ struct GameViewContentView: View {
                         .frame(alignment: .leading)
                     }
                     .padding(.horizontal)
+
+                    GoogleAdsManager()
+                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
-                .padding(.bottom, 20)
             }
             .toolbarVisibility(.hidden, for: .navigationBar)
         }

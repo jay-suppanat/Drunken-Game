@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 @main
 struct DrunkenApp: App {
     init() {
         self.initTabBarAppearance()
+        self.initGoogleAds()
     }
 
     var body: some Scene {
@@ -27,5 +29,9 @@ struct DrunkenApp: App {
         itemAppearance.standardAppearance = appearance
         itemAppearance.scrollEdgeAppearance = appearance
         itemAppearance.unselectedItemTintColor = UIColor.unselectedTabBarColor
+    }
+
+    private func initGoogleAds() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
 }

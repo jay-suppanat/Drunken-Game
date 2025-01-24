@@ -19,6 +19,10 @@ protocol Service {}
 
 protocol Logic {}
 
+// MARK: Get
+
+protocol Get {}
+
 // MARK: AppUtil
 
 protocol AppUtil {
