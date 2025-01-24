@@ -8,53 +8,54 @@
 import SwiftUI
 
 struct SettingContentView: View {
-    @StateObject var viewModel = SettingContentViewModel()
+    @StateObject var viewModel: SettingContentViewModel
 
     var body: some View {
-        ScrollView {
-            NavigationView {
-                VStack {
-                    ForEach(self.viewModel.settingMenu.list) { item in
-                        SettingCellView(id: item.id,
-                                        title: item.title,
-                                        image: item.image)
-                        .padding(.horizontal)
-                        .frame(height: 40)
-                    }
+        NavigationStack {
+            ZStack {
+                // MARK: Background View
+                AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
 
-                    Spacer()
+                VStack {
+                    //MARK: List View
+                    List {
+                        ForEach(0 ..< self.viewModel.getSettingMenuListCount(), id: \.self) { index in
+                            SettingCellView(data: self.viewModel.getSettingManuListAtIndex(index))
+                                .padding(.horizontal)
+                                .listRowBackground(Color.darkGrayColor)
+                                .frame(height: 36)
+                        }
+                    }
+                    .setupListView()
+                    .scrollDisabled(true)
                 }
             }
         }
-        .padding(.top, 10)
     }
 }
 
 // MARK: SettingCellView
 
 struct SettingCellView: View {
-    var id: Int
-    var title: String
-    var image: String
+    var data: SettingMenuElement
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color.backgroundColor)
-
             HStack {
-                Image(systemName: self.image)
+                Image(systemName: self.data.image)
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .tint(Color.whiteColor)
 
-                Text(self.title)
-                    .foregroundStyle(self.id == 1 ? .red : .black)
+                Text(self.data.title)
+                    .foregroundStyle(self.data.id == 1 ? Color.redColor : Color.blackColor)
 
                 Spacer()
             }
-            .padding(.horizontal)
         }
     }
 }
 
 #Preview {
-    SettingContentView()
+    SettingContentView(viewModel: SettingContentViewModel())
 }

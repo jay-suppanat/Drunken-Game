@@ -12,26 +12,27 @@ struct TabBarContentView: View {
     @State private var isActive: Bool = false
 
     var body: some View {
-        TabView(selection: $tabBarSelection) {
-
-            // MARK: Game Content View
-            GameViewContentView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Game")
-
-                }
-                .tag(0)
-
-            // MARK: Setting Content View
-            SettingContentView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Setting")
-                }
-                .tag(1)
-        }
-        .tint(Color.yellowColor)
+        GameViewContentView()
+//        TabView(selection: $tabBarSelection) {
+//
+//            // MARK: Game Content View
+//            GameViewContentView()
+//                .tabItem {
+//                    Image(systemName: "house.fill")
+//                    Text("Game")
+//
+//                }
+//                .tag(0)
+//
+//            // MARK: Setting Content View
+//            SettingContentView(viewModel: SettingContentViewModel())
+//                .tabItem {
+//                    Image(systemName: "gearshape.fill")
+//                    Text("Setting")
+//                }
+//                .tag(1)
+//        }
+//        .tint(Color.yellowColor)
     }
 }
 

@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 class SettingContentViewModel: ObservableObject {
-    @Published var settingMenu: SettingMenuListModel = .init()
+    @Published private var settingMenuPublished: SettingMenuListModel = .init()
 
     init() {
         self.fetchSettingMenu()
@@ -21,7 +21,15 @@ class SettingContentViewModel: ObservableObject {
 extension SettingContentViewModel: Service {
     public func fetchSettingMenu() {
         DrunkenService.fetchSettingMenuList { response in
-            self.settingMenu = response
+            self.settingMenuPublished = response
         }
+    }
+
+    public func getSettingMenuListCount() -> Int {
+        return self.settingMenuPublished.list.count
+    }
+
+    public func getSettingManuListAtIndex(_ index: Int) -> SettingMenuElement {
+        return self.settingMenuPublished.list[index]
     }
 }
