@@ -12,6 +12,7 @@ struct GameViewContentView: View {
     @State private var isOpen: Bool = false
     @State private var isShowCommand: Bool = false
     @State private var isGoToEditView: Bool = false
+    @State private var isOpenSideMenu: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -21,15 +22,6 @@ struct GameViewContentView: View {
 
                 VStack(spacing: 175) {
                     HStack {
-                        Button {
-                            // Action open side menu
-                        } label: {
-                            Image(systemName: "list.bullet.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .tint(Color.whiteColor)
-                        }
-
                         Spacer()
 
                         // MARK: Reset Button
@@ -85,7 +77,6 @@ struct GameViewContentView: View {
                                 .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpen)
 
                             // MARK: Card View Button
-
                             Button {
                                 self.touchCardView()
                             } label: {
@@ -120,6 +111,64 @@ struct GameViewContentView: View {
                     Spacer()
                 }
                 .padding(.top, 20)
+
+                // MARK: Side Menu Button
+                VStack {
+                    Spacer()
+
+                    HStack {
+                        Spacer()
+
+                        if self.isOpenSideMenu {
+                            HStack {
+                                // MARK: Setting Button
+                                Button {
+                                    // Setting
+                                } label: {
+                                    Image(systemName: "info.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .tint(Color.whiteColor)
+                                }
+
+                                // MARK: Remove Ads Button
+                                Button {
+                                    // Remove Ads
+                                } label: {
+                                    Image(systemName: "cart.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .tint(Color.whiteColor)
+                                }
+
+                                // MARK: Info Button
+                                Button {
+                                    // Info
+                                } label: {
+                                    Image(systemName: "gearshape.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .tint(Color.whiteColor)
+                                }
+                            }
+                        }
+
+                        // MARK: Side Menu Button
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                self.isOpenSideMenu.toggle()
+                            }
+                        } label: {
+                            Image(systemName: self.isOpenSideMenu ? "chevron.left.circle.fill" : "list.bullet.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .tint(self.isOpenSideMenu ? Color.yellowColor : Color.whiteColor)
+                        }
+                        .frame(alignment: .leading)
+                    }
+                    .padding(.horizontal)
+                }
+                .padding(.bottom, 20)
             }
             .toolbarVisibility(.hidden, for: .navigationBar)
         }
