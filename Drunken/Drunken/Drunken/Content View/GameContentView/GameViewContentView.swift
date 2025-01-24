@@ -21,7 +21,7 @@ struct GameViewContentView: View {
                 AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
                 VStack(spacing: 175) {
-                    HStack {
+                    HStack(spacing: self.viewModel.isCanEditCommand ? 10 : 0) {
                         Spacer()
 
                         // MARK: Reset Button
@@ -51,7 +51,6 @@ struct GameViewContentView: View {
                                 Image(systemName: "pencil.circle.fill")
                                     .resizable()
                                     .frame(width: !self.viewModel.isCanEditCommand ? 0 : 30, height: 30)
-                                    .tint(self.viewModel.isCanEditCommand ? Color.whiteColor : Color.redColor)
                             }
                             .navigationDestination(isPresented: self.$isGoToEditView) {
                                 PunishmentListContentView(viewModel: PunishmentListViewModel())
