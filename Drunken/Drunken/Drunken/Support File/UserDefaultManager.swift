@@ -10,6 +10,7 @@ import Foundation
 class UserDefaultManager {
     static let shared = UserDefaultManager()
 
+    private let gameListKey = "GAME_LIST_KEY"
     private let command2Key = "COMMAND_2_KEY"
     private let command3Key = "COMMAND_3_KEY"
     private let command4Key = "COMMAND_4_KEY"
@@ -25,6 +26,31 @@ class UserDefaultManager {
     private let commandAceKey = "COMMAND_ACE_KEY"
 
     private init() {}
+
+    // MARK: Get-Set Game List
+
+    public func setGameList(list: GameListModel) {
+        do {
+            let encodedData = try JSONEncoder().encode(list)
+            UserDefaults.standard.set(encodedData, forKey: self.gameListKey)
+        } catch {
+            print("Failed to encode GameListModel: \(error)")
+        }
+    }
+
+    public func getCommand2() -> GameListModel {
+        guard let data = UserDefaults.standard.data(forKey: self.gameListKey) else {
+            return GameListModel()
+        }
+
+        do {
+            let decodedList = try JSONDecoder().decode(GameListModel.self, from: data)
+            return decodedList
+        } catch {
+            print("Failed to decode GameListModel: \(error)")
+            return GameListModel()
+        }
+    }
 
     // MARK: Get-Set Command 2
 

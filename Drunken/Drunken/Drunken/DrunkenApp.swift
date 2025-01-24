@@ -16,6 +16,7 @@ struct DrunkenApp: App {
     init() {
         self.initTabBarAppearance()
         self.initGoogleAds()
+        DrunkenService.fetchGameList()
     }
 
     var body: some Scene {
