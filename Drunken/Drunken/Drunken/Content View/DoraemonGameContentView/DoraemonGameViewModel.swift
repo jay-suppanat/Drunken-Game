@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameViewModel: ObservableObject {
+class DoraemonGameViewModel: ObservableObject {
     @Published public var card: String = ""
     @Published public var isGameEnd: Bool = false
     @Published public var isCanEditCommand: Bool = true
@@ -39,7 +39,7 @@ class GameViewModel: ObservableObject {
 
 // MARK: Logic
 
-extension GameViewModel: Logic {
+extension DoraemonGameViewModel: Logic {
     public func randomCard() {
         self.isCanEditCommand = false
 

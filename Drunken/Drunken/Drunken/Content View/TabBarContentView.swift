@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct TabBarContentView: View {
-    @State private var tabBarSelection: Int = 0
-    @State private var isActive: Bool = false
+enum GameSelective {
+    case doraemonCardGame
+    case rotateBottle
+}
 
+struct TabBarContentView: View {
     var body: some View {
-        GameViewContentView()
+        ZStack {
+            DoraemonGameContentView()
+        }
+
+
+
+
+
+
 //        TabView(selection: $tabBarSelection) {
 //
 //            // MARK: Game Content View

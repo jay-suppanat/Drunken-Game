@@ -8,8 +8,8 @@
 import SwiftUI
 import GoogleMobileAds
 
-struct GameViewContentView: View {
-    @StateObject private var viewModel: GameViewModel = .init()
+struct DoraemonGameContentView: View {
+    @StateObject private var viewModel: DoraemonGameViewModel = .init()
 
     // Action State
     @State private var isShowPunishment: Bool = false
@@ -145,6 +145,6 @@ struct GameViewContentView: View {
 }
 
 #Preview {
-    GameViewContentView()
+    DoraemonGameContentView()
         .background(Color.orange)
 }
