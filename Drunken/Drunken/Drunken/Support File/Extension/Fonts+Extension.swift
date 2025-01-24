@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 extension Font {
-    static let lazyDog14: Font = Font.custom("Lazydog.ttf", size: 14)
+    static let lazyDog14: Font = Font.custom("Lazydog", size: 14)
 }

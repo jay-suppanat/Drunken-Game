@@ -35,7 +35,7 @@ struct TabBarContentView: View {
                             self.isOpenGameList.toggle()
                         } label: {
                             HStack {
-                                Image(systemName: "arrow.left.circle.fill")
+                                Image(systemName: "list.bullet.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
                                     .tint(Color.yellowColor)
