@@ -26,7 +26,7 @@ struct TabBarContentView: View {
             default:
                 Text("Sorry, This menu is not available now.")
                     .multilineTextAlignment(.center)
-                    .font(Font.lazyDog25)
+                    .font(.lazyDog25)
                     .foregroundStyle(Color.redColor)
             }
 
@@ -51,7 +51,7 @@ struct TabBarContentView: View {
 
                                 if self.isOpenMenuList {
                                     Text("Menu")
-                                        .font(Font.lazyDog16)
+                                        .font(.lazyDog16)
                                         .foregroundStyle(Color.whiteColor)
                                 }
                             }
@@ -98,19 +98,11 @@ struct GameListCell: View {
                     }
                     self.appEnvironment.menuSelectedIndex = self.data.id
                 } label: {
-                    switch self.data.game {
-                    case "setting", "info":
-                        Text("\(self.data.id). \(self.data.gameName)")
-                            .font(Font.lazyDog16)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 6)
-                            .foregroundStyle(Color.blackColor)
-                    default:
-                        Text("\(self.data.id). \(self.data.gameName)")
-                            .font(Font.lazyDog16)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 6)
-                    }
+                    Text("\(self.data.id). \(self.data.gameName)")
+                        .font(.lazyDog16)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                        .foregroundStyle(self.appEnvironment.menuSelectedIndex == self.data.id ? Color.accentColor : Color.blackColor)
                 }
                 .background(Color.whiteColor)
                 .clipShape(RoundedRectangle(cornerRadius: 10))

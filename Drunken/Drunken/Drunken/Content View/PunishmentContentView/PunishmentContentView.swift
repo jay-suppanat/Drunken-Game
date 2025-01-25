@@ -21,7 +21,7 @@ struct PunishmentContentView: View {
                 } label: {
                     VStack(spacing: 30) {
                         Text("Your Card: \(DrunkenUtil().getCardNumberText(card: self.viewModel.getCard()))")
-                            .font(.system(size: 30, weight: .bold))
+                            .font(.lazyDog30)
 
                         VStack(spacing: 20) {
                             Image(self.viewModel.getCard())
@@ -32,10 +32,11 @@ struct PunishmentContentView: View {
 
                             VStack(spacing: 10) {
                                 Text("Description Punishment")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.lazyDog16)
+                                    .foregroundStyle(Color.redColor)
 
                                 Text(DrunkenUtil().getPunishment(card: self.viewModel.getCard()))
-                                    .font(.system(size: 16, weight: .medium))
+                                    .font(.lazyDog16)
                                     .frame(alignment: .leading)
                             }
                         }
