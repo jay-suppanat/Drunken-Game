@@ -22,6 +22,7 @@ extension Color {
     static let darkGrayColor = Color("dark_gray_color")
     static let mintGreenColor = Color("mint_green_color")
     static let lightRedColor = Color("light_red_color")
+    static let lightGrayColor = Color("light_gray_color")
 }
 
 // MARK: UIColor

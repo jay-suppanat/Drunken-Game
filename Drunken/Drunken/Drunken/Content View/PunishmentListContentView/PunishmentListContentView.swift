@@ -100,7 +100,7 @@ struct EditCommandCell: View {
                         Text("Card \(self.card)")
                             .font(Font.lazyDog16)
                             .frame(alignment: .leading)
-                            .tint(Color.textColor)
+                            .tint(Color.yellowColor)
 
                         Spacer()
 
@@ -117,7 +117,7 @@ struct EditCommandCell: View {
                         // MARK: Edit Punishment View
                         TextEditor(text: self.$editCommand)
                             .frame(height: 100)
-                            .background(Color.whiteColor)
+                            .background(Color.lightGrayColor)
                             .cornerRadius(10)
                             .foregroundStyle(Color.blackColor)
                             .scrollContentBackground(.hidden)
@@ -158,8 +158,9 @@ struct EditCommandCell: View {
                         }
                     }
                 } else {
+                    // MARK: Punsishment Text View
                     HStack {
-                        Text(self.command)
+                        Text(self.editCommand)
                             .foregroundStyle(Color.whiteColor)
                             .multilineTextAlignment(.leading)
 
