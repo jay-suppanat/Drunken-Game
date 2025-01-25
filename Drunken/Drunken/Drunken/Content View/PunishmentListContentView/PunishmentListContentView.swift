@@ -11,6 +11,8 @@ import SwiftUI
 
 struct PunishmentListContentView: View {
     @StateObject var viewModel: PunishmentListViewModel
+
+    // Action
     @State private var isShowResetAlert: Bool = false
 
     var body: some View {
@@ -54,7 +56,8 @@ struct PunishmentListContentView: View {
                         ForEach(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
                             EditCommandCell(index: index,
                                             card: self.viewModel.getPunishmentTitleAtIndex(index),
-                                            command: self.viewModel.getPunishmentAtIndex(index))
+                                            command: .constant(self.viewModel.getPunishmentAtIndex(index)),
+                                            editCommand: self.viewModel.getPunishmentAtIndex(index))
                                 .listRowBackground(Color.darkGrayColor.opacity(0.5))
                         }
                     }
@@ -71,7 +74,8 @@ struct PunishmentListContentView: View {
 struct EditCommandCell: View {
     var index: Int
     @State var card: String
-    @State var command: String
+    @Binding var command: String
+    @State var editCommand: String
 
     // Environment
     @EnvironmentObject private var environment: EnvironmentManager
@@ -99,15 +103,19 @@ struct EditCommandCell: View {
                             .tint(Color.textColor)
 
                         Spacer()
+
+                        Image(systemName: "chevron.up.circle.fill")
+                            .frame(width: 30, height: 30)
+                            .rotationEffect(Angle(degrees: self.isShowEditField && self.environment.editPunishmentIndex == self.index ? 180 : 0))
+                            .tint(self.isShowEditField && self.environment.editPunishmentIndex == self.index ? Color.mintGreenColor : Color.lightRedColor)
                     }
-                    .padding(10)
+                    .frame(height: 30)
                 }
 
                 if self.isShowEditField && self.environment.editPunishmentIndex == self.index {
-                    // MARK: Edit Punishment View
-
                     VStack {
-                        TextEditor(text: self.$command)
+                        // MARK: Edit Punishment View
+                        TextEditor(text: self.$editCommand)
                             .frame(height: 100)
                             .background(Color.whiteColor)
                             .cornerRadius(10)
@@ -120,7 +128,9 @@ struct EditCommandCell: View {
 
                             // MARK: Cancel
                             Button {
-                                // Dismiss
+                                withAnimation {
+                                    self.touchCancel()
+                                }
                             } label: {
                                 Text(Constants.Button.cancel)
                                     .padding(5)
@@ -131,22 +141,33 @@ struct EditCommandCell: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
 
                             // MARK: Submit
-                            Button {
-                                // Save
-                            } label: {
-                                Text(Constants.Button.submit)
-                                    .padding(5)
-                                    .font(.lazyDog16)
-                                    .foregroundStyle(Color.blackColor)
+                            if self.editCommand != DrunkenUtil().getPunishment(card: self.card) {
+                                Button {
+                                    withAnimation {
+                                        self.touchSubmit()
+                                    }
+                                } label: {
+                                    Text(Constants.Button.submit)
+                                        .padding(5)
+                                        .font(.lazyDog16)
+                                        .foregroundStyle(Color.blackColor)
+                                }
+                                .background(Color.greenColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
-                            .background(Color.greenColor)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
-                    .padding(.horizontal, 10)
+                } else {
+                    HStack {
+                        Text(self.command)
+                            .foregroundStyle(Color.whiteColor)
+                            .multilineTextAlignment(.leading)
+
+                        Spacer()
+                    }
                 }
             }
-            .padding(5)
+            .padding(10)
         }
     }
 
@@ -158,85 +179,16 @@ struct EditCommandCell: View {
             self.environment.editPunishmentIndex = self.index
         }
     }
-}
 
-// MARK: EditCommandAlert
-
-struct EditCommandAlert: View {
-    @State var card: String
-    @Binding var isShowEditCommandView: Bool
-    @State var newCommand: String = ""
-
-    var body: some View {
-        ZStack {
-            Color.blackColor
-                .ignoresSafeArea()
-
-            VStack(spacing: 30) {
-
-                // MARK: Punishment Text
-                Text(DrunkenUtil().getPunishment(card: self.card))
-                    .frame(alignment: .center)
-                    .foregroundStyle(Color.whiteColor)
-
-                // MARK: Text Editor
-                TextEditor(text: self.$newCommand)
-                    .frame(height: 150)
-                    .background(Color.darkGrayColor)
-                    .cornerRadius(10)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    }
-                    .foregroundStyle(Color.whiteColor)
-                    .scrollContentBackground(.hidden)
-
-                HStack(spacing: 50) {
-                    Spacer()
-
-                    // MARK: Cancel Button
-                    Button {
-                        self.touchCancel()
-                    } label: {
-                        Text(Constants.Button.cancel)
-                            .padding(.vertical, 5)
-                            .padding(.horizontal)
-                            .tint(Color.textColor)
-                    }
-                    .background(Color.redColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                    // MARK: Submit Button
-                    Button {
-                        self.touchSubmit()
-                    } label: {
-                        Text(Constants.Button.submit)
-                            .padding(.vertical, 5)
-                            .padding(.horizontal)
-                            .tint(Color.textColor)
-                    }
-                    .background(Color.greenColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .disabled(!self.checkIsChangeCommand())
-
-                    Spacer()
-                }
-            }
-            .padding(.horizontal)
-        }
+    private func touchSubmit() {
+        self.isShowEditField = false
+        DrunkenUtil().setPunishment(card: self.card, newCommand: self.editCommand)
+        self.command = self.editCommand
     }
 
     private func touchCancel() {
-        self.isShowEditCommandView = false
-    }
-
-    private func touchSubmit() {
-        DrunkenUtil().setPunishment(card: self.card, newCommand: self.newCommand)
-        self.isShowEditCommandView = false
-    }
-
-    private func checkIsChangeCommand() -> Bool {
-        return !self.newCommand.isEmpty
+        self.editCommand = DrunkenUtil().getPunishment(card: self.card)
+        self.isShowEditField = false
     }
 }
 
