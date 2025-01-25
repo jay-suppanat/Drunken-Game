@@ -39,7 +39,7 @@ struct DoraemonGameContentView: View {
                                 .frame(width: 30, height: 30)
                                 .tint(Color.whiteColor)
                         }
-                        .alert(Constants.Text.gameEnd, isPresented: self.$viewModel.isShowAlert) {
+                        .alert(Constants.Text.alert, isPresented: self.$viewModel.isShowAlert) {
                             Button(Constants.Button.restart) {
                                 self.viewModel.fillCard()
                             }
@@ -105,12 +105,13 @@ struct DoraemonGameContentView: View {
                     .fullScreenCover(isPresented: self.$isShowPunishment, onDismiss: {
                         DispatchQueue.main.asyncAfter(deadline: .now() + self.viewModel.getAnimationTime()) {
                             self.isOpenCard.toggle()
+                            self.viewModel.checkIsGameEnd()
                         }
                     }, content: {
                         PunishmentContentView(viewModel: PunishmentContentViewModel(card: self.viewModel.card),
                                            isDismiss: self.$isShowPunishment)
                     })
-                    .alert(Constants.Text.restartGameAlert, isPresented: self.$viewModel.isGameEnd) {
+                    .alert(Constants.Text.gameEnd, isPresented: self.$viewModel.isGameEnd) {
                         Button(Constants.Button.restart) {
                             self.viewModel.fillCard()
                         }
@@ -118,6 +119,8 @@ struct DoraemonGameContentView: View {
                         Button(Constants.Button.cancel, role: .cancel) {
                             self.viewModel.touchCancelAlertButton()
                         }
+                    } message: {
+                        Text(Constants.Text.restartGameAlert)
                     }
 
                     Spacer()

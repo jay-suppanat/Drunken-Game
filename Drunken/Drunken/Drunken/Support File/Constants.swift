@@ -23,6 +23,7 @@ enum Constants {
         static let editCommand = "Edit Command"
         static let restartGameAlert = "Would you like to restart the game?"
         static let gameEnd = "Game End"
+        static let alert = "Alert"
     }
 
     enum CardDeck {
