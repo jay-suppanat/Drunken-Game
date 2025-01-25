@@ -18,7 +18,7 @@ struct PunishmentListContentView: View {
             // MARK: Background View
             AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.backgroundColor]))
 
-            VStack {
+            VStack(spacing: 10) {
                 // MARK: Reset Button
                 HStack {
                     Spacer()
@@ -50,12 +50,14 @@ struct PunishmentListContentView: View {
 
                 // MARK: List Content
                 if self.viewModel.getPunishmentCount() == self.viewModel.getPunishmentTitleCount() {
-                    List(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
-                        EditCommandCell(card: self.viewModel.getPunishmentTitleAtIndex(index),
-                                        command: self.viewModel.getPunishmentAtIndex(index))
-                            .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                    ScrollView {
+                        ForEach(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
+                            EditCommandCell(index: index,
+                                            card: self.viewModel.getPunishmentTitleAtIndex(index),
+                                            command: self.viewModel.getPunishmentAtIndex(index))
+                                .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                        }
                     }
-                    .setupListView()
                 }
             }
             .padding(.horizontal)
@@ -67,30 +69,94 @@ struct PunishmentListContentView: View {
 // MARK: EditCommandCell
 
 struct EditCommandCell: View {
+    var index: Int
     @State var card: String
     @State var command: String
 
+    // Environment
+    @EnvironmentObject private var environment: EnvironmentManager
+
     // Action
     @State var isShowEditCommandView: Bool = false
+    @State var isShowEditField: Bool = false
 
     var body: some View {
-        Button {
-            self.touchCell()
-        } label: {
-            Text("Card \(self.card)")
-                .font(Font.lazyDog16)
-                .frame(alignment: .leading)
-                .tint(Color.textColor)
-        }
-        .fullScreenCover(isPresented: self.$isShowEditCommandView) {
-        } content: {
-            EditCommandAlert(card: self.card,
-                             isShowEditCommandView: self.$isShowEditCommandView)
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.whiteColor.opacity(0.5))
+
+            VStack {
+                // MARK: Expand Button Action
+                Button {
+                    withAnimation {
+                        self.touchCell()
+                    }
+                } label: {
+                    HStack {
+                        Text("Card \(self.card)")
+                            .font(Font.lazyDog16)
+                            .frame(alignment: .leading)
+                            .tint(Color.textColor)
+
+                        Spacer()
+                    }
+                    .padding(10)
+                }
+
+                if self.isShowEditField && self.environment.editPunishmentIndex == self.index {
+                    // MARK: Edit Punishment View
+
+                    VStack {
+                        TextEditor(text: self.$command)
+                            .frame(height: 100)
+                            .background(Color.whiteColor)
+                            .cornerRadius(10)
+                            .foregroundStyle(Color.blackColor)
+                            .scrollContentBackground(.hidden)
+                            .animation(.easeInOut, value: self.isShowEditField && self.environment.editPunishmentIndex == self.index)
+
+                        HStack {
+                            Spacer()
+
+                            // MARK: Cancel
+                            Button {
+                                // Dismiss
+                            } label: {
+                                Text(Constants.Button.cancel)
+                                    .padding(5)
+                                    .font(.lazyDog16)
+                                    .foregroundStyle(Color.blackColor)
+                            }
+                            .background(Color.redColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                            // MARK: Submit
+                            Button {
+                                // Save
+                            } label: {
+                                Text(Constants.Button.submit)
+                                    .padding(5)
+                                    .font(.lazyDog16)
+                                    .foregroundStyle(Color.blackColor)
+                            }
+                            .background(Color.greenColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                }
+            }
+            .padding(5)
         }
     }
 
     private func touchCell() {
-        self.isShowEditCommandView.toggle()
+        if self.environment.editPunishmentIndex == self.index {
+            self.isShowEditField.toggle()
+        } else {
+            self.isShowEditField = true
+            self.environment.editPunishmentIndex = self.index
+        }
     }
 }
 

@@ -5,16 +5,20 @@
 //  Created by Suppanat Chinthumrucks on 23/1/2568 BE.
 //
 
-import SwiftUICore
 import SwiftUI
+import SwiftUICore
 
-extension View {
-    public func setupNavigationBar(title: String) -> some View {
+public extension View {
+    func setupNavigationBar(title: String) -> some View {
         self.modifier(NavigationBarModifier(title: title))
     }
 
-    public func setupListView() -> some View {
+    func setupListView() -> some View {
         self.modifier(ListViewModifier())
+    }
+
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
