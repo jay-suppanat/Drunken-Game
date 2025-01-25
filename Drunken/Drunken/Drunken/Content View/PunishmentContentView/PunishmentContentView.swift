@@ -24,20 +24,49 @@ struct PunishmentContentView: View {
                             .font(.lazyDog30)
 
                         VStack(spacing: 20) {
-                            Image(self.viewModel.getCard())
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 14))
-                                .frame(width: 267, height: 400)
-                                .aspectRatio(contentMode: .fill)
+                            VStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .fill(Color.frontCardColor)
+
+                                    VStack {
+                                        HStack {
+                                            Text(self.viewModel.getCard().first?.description ?? "")
+                                                .font(.lazyDog80)
+                                                .foregroundStyle(DrunkenUtil().getCardNumberColor(card: self.viewModel.getCard()))
+
+                                            Spacer()
+                                        }
+                                        .padding(.top, 20)
+
+                                        Spacer()
+
+                                        Text(DrunkenUtil().getCardSuit(card: self.viewModel.getCard()))
+                                            .font(.lazyDog80)
+
+                                        Spacer()
+
+                                        HStack {
+                                            Spacer()
+
+                                            Text(self.viewModel.getCard().first?.description ?? "")
+                                                .font(.lazyDog80)
+                                                .foregroundStyle(DrunkenUtil().getCardNumberColor(card: self.viewModel.getCard()))
+                                        }
+                                        .frame(alignment: .bottomTrailing)
+                                    }
+                                    .padding(.horizontal, 15)
+                                }
+                            }
+                            .frame(width: 267, height: 400)
 
                             VStack(spacing: 10) {
                                 Text("Description Punishment")
-                                    .font(.lazyDog16)
+                                    .font(.lazyDog18)
                                     .foregroundStyle(Color.redColor)
 
                                 Text(DrunkenUtil().getPunishment(card: self.viewModel.getCard()))
-                                    .font(.lazyDog16)
-                                    .frame(alignment: .leading)
+                                    .font(.notoSan18)
                             }
                         }
                     }
@@ -54,5 +83,5 @@ struct PunishmentContentView: View {
 }
 
 #Preview {
-//    CommandContentView(cardNumber: "2")
+    PunishmentContentView(viewModel: PunishmentContentViewModel(card: "0"), isDismiss: .constant(false))
 }

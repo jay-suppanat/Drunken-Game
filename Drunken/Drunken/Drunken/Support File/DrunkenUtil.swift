@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class DrunkenUtil: AppUtil {
     public func getCardNumberText(card: String) -> String {
@@ -31,6 +32,32 @@ class DrunkenUtil: AppUtil {
         }
 
         return numb + suit
+    }
+
+    public func getCardNumberColor(card: String) -> Color {
+        switch card.count {
+        case 1, 4:
+            return Color.blackColor
+        case 2, 3:
+            return Color.redColor
+        default:
+            return Color.whiteColor.opacity(0)
+        }
+    }
+
+    public func getCardSuit(card: String) -> String {
+        switch card.count {
+        case 1:
+            return "♣️"
+        case 2:
+            return "♦️"
+        case 3:
+            return "♥️"
+        case 4:
+            return "♠️"
+        default:
+            return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+        }
     }
 
     public func getPunishment(card: String) -> String {
