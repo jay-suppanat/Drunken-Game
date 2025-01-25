@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>NotoSansThai-Regular.ttf</string>
 		<string>Lazydog.ttf</string>
 	</array>
 	<key>SKAdNetworkItems</key>

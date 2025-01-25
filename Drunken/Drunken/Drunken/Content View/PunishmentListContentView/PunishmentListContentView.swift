@@ -119,6 +119,7 @@ struct EditCommandCell: View {
                             .frame(height: 100)
                             .background(Color.lightGrayColor)
                             .cornerRadius(10)
+                            .font(.notoSan14)
                             .foregroundStyle(Color.blackColor)
                             .scrollContentBackground(.hidden)
                             .animation(.easeInOut, value: self.isShowEditField && self.environment.editPunishmentIndex == self.index)
@@ -163,6 +164,7 @@ struct EditCommandCell: View {
                         Text(self.editCommand)
                             .foregroundStyle(Color.whiteColor)
                             .multilineTextAlignment(.leading)
+                            .font(.notoSan16)
 
                         Spacer()
                     }
