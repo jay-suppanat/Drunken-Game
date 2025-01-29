@@ -19,9 +19,9 @@ struct TabBarContentView: View {
     var body: some View {
         ZStack {
             switch self.appEnvironment.menuSelectedIndex {
-            case 1:
+            case 0:
                 DoraemonGameContentView()
-            case 2:
+            case 1:
                 BottleSpinContentView(viewModel: BottleSpinViewModel())
             default:
                 Text("Sorry, This menu is not available now.")
@@ -51,6 +51,10 @@ struct TabBarContentView: View {
 
                                 if self.isOpenMenuList {
                                     Text("Menu")
+                                        .font(.lazyDog16)
+                                        .foregroundStyle(Color.whiteColor)
+                                } else {
+                                    Text(UserDefaultManager.shared.getGameList().list[self.appEnvironment.menuSelectedIndex].gameName)
                                         .font(.lazyDog16)
                                         .foregroundStyle(Color.whiteColor)
                                 }
@@ -98,7 +102,7 @@ struct GameListCell: View {
                     }
                     self.appEnvironment.menuSelectedIndex = self.data.id
                 } label: {
-                    Text("\(self.data.id). \(self.data.gameName)")
+                    Text("\(self.data.id + 1). \(self.data.gameName)")
                         .font(.lazyDog16)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 6)

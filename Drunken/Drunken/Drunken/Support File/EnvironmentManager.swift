@@ -9,6 +9,7 @@ import Foundation
 
 class EnvironmentManager: ObservableObject {
     @Published public var isShowMenuList: Bool = true
-    @Published public var menuSelectedIndex: Int = 1
+    @Published public var menuSelectedIndex: Int = 0
+    @Published public var menuSelectedTitle: String = ""
     @Published public var editPunishmentIndex: Int = 0
 }
