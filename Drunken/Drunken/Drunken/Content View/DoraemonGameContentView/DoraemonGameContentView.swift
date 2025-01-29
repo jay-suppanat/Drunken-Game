@@ -63,7 +63,7 @@ struct DoraemonGameContentView: View {
                                     .tint(Color.whiteColor)
                             }
                             .navigationDestination(isPresented: self.$isOpenEditPunishmentView) {
-                                PunishmentListContentView(viewModel: PunishmentListViewModel())
+                                PunishmentListContentView(viewModel: PunishmentListViewModel(), isOpenEditPunishmentView: self.$isOpenEditPunishmentView)
                             }
                             .onAppear {
                                 self.appEnvironment.isShowMenuList = true

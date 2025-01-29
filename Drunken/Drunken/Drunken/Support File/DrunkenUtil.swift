@@ -95,6 +95,39 @@ class DrunkenUtil: AppUtil {
         }
     }
 
+    public func getDefaultCommand(card: String) -> String {
+        switch card {
+        case let str where str.contains("2"):
+            return Constants.Command.command2
+        case let str where str.contains("3"):
+            return Constants.Command.command3
+        case let str where str.contains("4"):
+            return Constants.Command.command4
+        case let str where str.contains("5"):
+            return Constants.Command.command5
+        case let str where str.contains("6"):
+            return Constants.Command.command6
+        case let str where str.contains("7"):
+            return Constants.Command.command7
+        case let str where str.contains("8"):
+            return Constants.Command.command8
+        case let str where str.contains("9"):
+            return Constants.Command.command9
+        case let str where str.contains("0"):
+            return Constants.Command.command10
+        case let str where str.contains("J"):
+            return Constants.Command.commandJ
+        case let str where str.contains("Q"):
+            return Constants.Command.commandQ
+        case let str where str.contains("K"):
+            return Constants.Command.commandK
+        case let str where str.contains("A"):
+            return Constants.Command.commandA
+        default:
+            return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+        }
+    }
+
     public func setPunishment(card: String, newCommand: String) {
         print("Set Punishment")
 

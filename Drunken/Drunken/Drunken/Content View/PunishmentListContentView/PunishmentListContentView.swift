@@ -14,6 +14,7 @@ struct PunishmentListContentView: View {
 
     // Action
     @State private var isShowResetAlert: Bool = false
+    @Binding public var isOpenEditPunishmentView: Bool
 
     var body: some View {
         ZStack {
@@ -40,6 +41,7 @@ struct PunishmentListContentView: View {
                         Button("Reset") {
                             self.viewModel.resetPunishment()
                             self.isShowResetAlert = false
+                            self.isOpenEditPunishmentView.toggle()
                         }
 
                         Button("Cancel", role: .cancel) {
@@ -51,16 +53,16 @@ struct PunishmentListContentView: View {
                 }
 
                 // MARK: List Content
-                if self.viewModel.getPunishmentCount() == self.viewModel.getPunishmentTitleCount() {
+                if self.viewModel.commandListPublished.count == self.viewModel.commandTitleListPublished.count {
                     ScrollView {
-                        ForEach(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
+                        ForEach(0 ..< self.viewModel.commandListPublished.count, id: \.self) { index in
                             EditCommandCell(index: index,
-                                            card: self.viewModel.getPunishmentTitleAtIndex(index),
-                                            command: .constant(self.viewModel.getPunishmentAtIndex(index)),
-                                            editCommand: self.viewModel.getPunishmentAtIndex(index))
-                                .listRowBackground(Color.darkGrayColor.opacity(0.5))
+                                            card: self.viewModel.commandTitleListPublished[index],
+                                            command: self.viewModel.commandListPublished[index].punishment)
+
                         }
                     }
+                    .scrollIndicators(.hidden)
                 }
             }
             .padding(.horizontal)
@@ -74,8 +76,7 @@ struct PunishmentListContentView: View {
 struct EditCommandCell: View {
     var index: Int
     @State var card: String
-    @Binding var command: String
-    @State var editCommand: String
+    @State var command: String
 
     // Environment
     @EnvironmentObject private var environment: EnvironmentManager
@@ -115,7 +116,7 @@ struct EditCommandCell: View {
                 if self.isShowEditField && self.environment.editPunishmentIndex == self.index {
                     VStack {
                         // MARK: Edit Punishment View
-                        TextEditor(text: self.$editCommand)
+                        TextEditor(text: self.$command)
                             .frame(height: 100)
                             .background(Color.lightGrayColor)
                             .cornerRadius(10)
@@ -142,7 +143,7 @@ struct EditCommandCell: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
 
                             // MARK: Submit
-                            if self.editCommand != DrunkenUtil().getPunishment(card: self.card) {
+                            if self.command != DrunkenUtil().getPunishment(card: self.card) {
                                 Button {
                                     withAnimation {
                                         self.touchSubmit()
@@ -161,7 +162,7 @@ struct EditCommandCell: View {
                 } else {
                     // MARK: Punsishment Text View
                     HStack {
-                        Text(self.editCommand)
+                        Text(self.command)
                             .foregroundStyle(Color.whiteColor)
                             .multilineTextAlignment(.leading)
                             .font(.notoSan16)
@@ -185,12 +186,11 @@ struct EditCommandCell: View {
 
     private func touchSubmit() {
         self.isShowEditField = false
-        DrunkenUtil().setPunishment(card: self.card, newCommand: self.editCommand)
-        self.command = self.editCommand
+        DrunkenUtil().setPunishment(card: self.card, newCommand: self.command)
     }
 
     private func touchCancel() {
-        self.editCommand = DrunkenUtil().getPunishment(card: self.card)
+        self.command = DrunkenUtil().getPunishment(card: self.card)
         self.isShowEditField = false
     }
 }

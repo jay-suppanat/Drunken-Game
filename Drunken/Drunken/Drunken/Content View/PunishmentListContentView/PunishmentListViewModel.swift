@@ -9,12 +9,11 @@ import Foundation
 import SwiftUI
 
 class PunishmentListViewModel: ObservableObject {
-    @Published private var commandListPublished: [String] = []
-    @Published private var commandTitleListPublished: [String] = []
+    @Published public var commandListPublished: [(id: UUID, title: String, punishment: String)] = []
+    @Published public var commandTitleListPublished: [String] = []
 
     init() {
-        self.commandListPublished = Constants.Command.commandArray
-        self.commandTitleListPublished = Constants.Command.commandTitleArray
+        self.fetchPunishment()
     }
 }
 
@@ -23,22 +22,21 @@ class PunishmentListViewModel: ObservableObject {
 extension PunishmentListViewModel: Logic {
     public func resetPunishment() {
         DrunkenUtil().resetPunishment()
-        self.commandListPublished = Constants.Command.commandArray
+
+        let title = Constants.Command.commandTitleArray
+        self.commandListPublished = title.map({ title in
+            let defaultPunishment = DrunkenUtil().getDefaultCommand(card: title)
+            return (id: UUID(), title: title, punishment: defaultPunishment)
+        })
     }
 
-    public func getPunishmentCount() -> Int {
-        return self.commandListPublished.count
-    }
+    public func fetchPunishment() {
+        self.commandTitleListPublished = Constants.Command.commandTitleArray
 
-    public func getPunishmentTitleCount() -> Int {
-        return self.commandTitleListPublished.count
-    }
-
-    public func getPunishmentAtIndex(_ index: Int) -> String {
-        return self.commandListPublished[index]
-    }
-
-    public func getPunishmentTitleAtIndex(_ index: Int) -> String {
-        return self.commandTitleListPublished[index]
+        let title = Constants.Command.commandTitleArray
+        self.commandListPublished = title.map({ title in
+            let saved = DrunkenUtil().getPunishment(card: title)
+            return (id: UUID(), title: title, punishment: saved)
+        })
     }
 }
