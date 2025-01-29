@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct BottleSpinContentView: View {
     @StateObject public var viewModel: BottleSpinViewModel
@@ -15,6 +16,8 @@ struct BottleSpinContentView: View {
             AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
 
             VStack {
+                Spacer()
+
                 Button {
                     self.viewModel.spinBottle()
                 } label: {
@@ -35,6 +38,16 @@ struct BottleSpinContentView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(self.viewModel.getIsSpiningStatus())
+
+                Spacer()
+
+                ZStack {
+                    AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
+                        .frame(width: UIScreen.main.bounds.width, height: GADAdSizeBanner.size.height)
+
+                    GoogleAdsManager()
+                        .frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                }
             }
         }
     }
