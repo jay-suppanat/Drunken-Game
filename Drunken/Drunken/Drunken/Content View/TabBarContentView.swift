@@ -22,7 +22,7 @@ struct TabBarContentView: View {
             case 1:
                 DoraemonGameContentView()
             case 2:
-                Text("asd")
+                BottleSpinContentView(viewModel: BottleSpinViewModel())
             default:
                 Text("Sorry, This menu is not available now.")
                     .multilineTextAlignment(.center)
