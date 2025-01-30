@@ -24,6 +24,7 @@ extension Color {
     static let lightRedColor = Color("light_red_color")
     static let lightGrayColor = Color("light_gray_color")
     static let frontCardColor = Color("front_card_color")
+    static let cellColor = Color("cell_color")
 }
 
 // MARK: UIColor

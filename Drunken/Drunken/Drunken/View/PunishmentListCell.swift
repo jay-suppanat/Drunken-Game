@@ -22,7 +22,7 @@ struct PunishmentListCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.whiteColor.opacity(0.5))
+                .fill(Color.cellColor.opacity(1))
 
             VStack {
                 // MARK: Expand Button Action
@@ -39,10 +39,10 @@ struct PunishmentListCell: View {
 
                         Spacer()
 
-                        Image(systemName: "chevron.up.circle.fill")
+                        Image(systemName: "chevron.up")
                             .frame(width: 30, height: 30)
                             .rotationEffect(Angle(degrees: self.isShowEditField && self.environment.editPunishmentIndex == self.index ? 180 : 0))
-                            .tint(self.isShowEditField && self.environment.editPunishmentIndex == self.index ? Color.mintGreenColor : Color.lightRedColor)
+                            .tint(Color.whiteColor)
                     }
                     .frame(height: 30)
                 }
