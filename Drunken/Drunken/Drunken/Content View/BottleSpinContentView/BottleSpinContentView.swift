@@ -22,7 +22,7 @@ struct BottleSpinContentView: View {
                     self.viewModel.spinBottle()
                 } label: {
                     ZStack {
-                        Color.yellowColor
+                        Color.cellColor
                             .clipShape(Circle())
                             .frame(width: 350, height: 350)
 

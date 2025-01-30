@@ -145,5 +145,4 @@ struct DoraemonGameContentView: View {
 
 #Preview {
     DoraemonGameContentView()
-        .background(Color.orange)
 }
