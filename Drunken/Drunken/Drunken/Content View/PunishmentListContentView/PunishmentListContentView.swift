@@ -39,29 +39,29 @@ struct PunishmentListContentView: View {
                         }
                     }
                     .frame(width: 30, height: 30, alignment: .trailing)
-                    .alert("Game End", isPresented: self.$isShowResetAlert) {
-                        Button("Reset") {
+                    .alert(Constants.Text.gameEnd, isPresented: self.$isShowResetAlert) {
+                        Button(Constants.Button.reset) {
                             self.viewModel.resetPunishment()
                             self.isShowResetAlert = false
                             self.isOpenEditPunishmentView.toggle()
                         }
 
-                        Button("Cancel", role: .cancel) {
+                        Button(Constants.Button.cancel, role: .cancel) {
                             self.isShowResetAlert = true
                         }
                     } message: {
-                        Text("Would you like to reset all punishment?")
+                        Text(Constants.Text.restartGameAlert)
                     }
                 }
 
                 // MARK: List Content
 
-                if self.viewModel.commandListPublished.count == self.viewModel.commandTitleListPublished.count {
+                if self.viewModel.getPunishmentCount() == self.viewModel.getPunishmentTitleCount() {
                     ScrollView {
-                        ForEach(0 ..< self.viewModel.commandListPublished.count, id: \.self) { index in
+                        ForEach(0 ..< self.viewModel.getPunishmentCount(), id: \.self) { index in
                             PunishmentListCell(index: index,
-                                               card: self.viewModel.commandTitleListPublished[index],
-                                               command: self.viewModel.commandListPublished[index].punishment)
+                                               card: self.viewModel.getPunishmentTitle(at: index),
+                                               command: self.viewModel.getPunisment(at: index))
                         }
                     }
                     .scrollIndicators(.hidden)
@@ -74,5 +74,5 @@ struct PunishmentListContentView: View {
 }
 
 #Preview {
-//    EditCommandContentView(viewModel: EditCommandViewModel())
+    PunishmentListContentView(viewModel: PunishmentListViewModel(), isOpenEditPunishmentView: .constant(false))
 }
