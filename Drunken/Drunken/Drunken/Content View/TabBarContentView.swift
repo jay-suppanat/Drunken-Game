@@ -24,6 +24,8 @@ struct TabBarContentView: View {
             case 1:
                 BottleSpinContentView(viewModel: BottleSpinViewModel())
             case 2:
+                DiceRollContentView(viewModel: DiceRollViewModel())
+            case 3:
                 AboutContentView(viewModel: AboutViewModel())
             default:
                 Text("Sorry, This menu is not available now.")

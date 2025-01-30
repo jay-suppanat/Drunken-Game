@@ -11,15 +11,19 @@ struct AboutContentView: View {
     @StateObject public var viewModel: AboutViewModel
 
     var body: some View {
-        VStack {
-            Text(self.viewModel.getAboutText())
-                .font(.notoSan16)
-                .foregroundStyle(Color.whiteColor)
+        ZStack {
+            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
 
-            Spacer()
+            VStack {
+                Text(self.viewModel.getAboutText())
+                    .font(.notoSan16)
+                    .foregroundStyle(Color.whiteColor)
+
+                Spacer()
+            }
+            .padding(.top, 45)
+            .padding()
         }
-        .padding(.top, 45)
-        .padding()
     }
 }
 
