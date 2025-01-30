@@ -137,7 +137,7 @@ struct EditCommandCell: View {
                                 Text(Constants.Button.cancel)
                                     .padding(5)
                                     .font(.lazyDog16)
-                                    .foregroundStyle(Color.blackColor)
+                                    .foregroundStyle(Color.whiteColor)
                             }
                             .background(Color.redColor)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -152,7 +152,7 @@ struct EditCommandCell: View {
                                     Text(Constants.Button.submit)
                                         .padding(5)
                                         .font(.lazyDog16)
-                                        .foregroundStyle(Color.blackColor)
+                                        .foregroundStyle(Color.whiteColor)
                                 }
                                 .background(Color.greenColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
