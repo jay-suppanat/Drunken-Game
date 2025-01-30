@@ -15,12 +15,6 @@
         },
         {
             "id": 2,
-            "game": "setting",
-            "gameName": "Setting",
-            "type": "menu"
-        },
-        {
-            "id": 3,
             "game": "about",
             "gameName": "About",
             "type": "menu"
