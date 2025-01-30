@@ -79,12 +79,7 @@ struct DoraemonGameContentView: View {
                     HStack {
                         ZStack {
                             // MARK: Slide Card View
-                            Image(AssetsManager.backCard.rawValue)
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .frame(width: 200, height: 300)
-                                .scaleEffect(1.5)
-                                .aspectRatio(contentMode: .fill)
+                            CardContentView(viewModel: CardViewModel(side: .back))
                                 .offset(y: self.isOpenCard ? UIScreen.main.bounds.height : 0)
                                 .animation(.easeInOut(duration: self.viewModel.getAnimationTime()), value: self.isOpenCard)
 
@@ -92,12 +87,7 @@ struct DoraemonGameContentView: View {
                             Button {
                                 self.touchCardView()
                             } label: {
-                                Image(AssetsManager.backCard.rawValue)
-                                    .resizable()
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    .frame(width: 200, height: 300)
-                                    .scaleEffect(1.5)
-                                    .aspectRatio(contentMode: .fill)
+                                CardContentView(viewModel: CardViewModel(side: .back))
                             }
                             .disabled(self.isOpenCard)
                         }
@@ -125,6 +115,7 @@ struct DoraemonGameContentView: View {
 
                     Spacer()
 
+                    // MARK: Google Ads
                     VStack {
                         ZStack {
                             AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
