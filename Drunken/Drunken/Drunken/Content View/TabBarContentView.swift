@@ -102,11 +102,20 @@ struct GameListCell: View {
                     }
                     self.appEnvironment.menuSelectedIndex = self.data.id
                 } label: {
-                    Text("\(self.data.id + 1). \(self.data.gameName)")
-                        .font(.lazyDog16)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 6)
-                        .foregroundStyle(self.appEnvironment.menuSelectedIndex == self.data.id ? Color.accentColor : Color.blackColor)
+                    switch self.data.type {
+                    case "game":
+                        Text("\(self.data.id + 1). \(self.data.gameName)")
+                            .font(.lazyDog16)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                            .foregroundStyle(self.appEnvironment.menuSelectedIndex == self.data.id ? Color.accentColor : Color.blackColor)
+                    default:
+                        Text(self.data.gameName)
+                            .font(.lazyDog16)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                            .foregroundStyle(self.appEnvironment.menuSelectedIndex == self.data.id ? Color.accentColor : Color.blackColor)
+                    }
                 }
                 .background(Color.whiteColor)
                 .clipShape(RoundedRectangle(cornerRadius: 10))

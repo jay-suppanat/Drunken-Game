@@ -21,11 +21,12 @@ struct GameListModel: Identifiable, Codable {
 // MARK: - List
 struct GameListElement: Identifiable, Codable {
     let id: Int
-    let game, gameName: String
+    let game, gameName, type: String
 
     init() {
         self.id = 0
         self.game = ""
         self.gameName = ""
+        self.type = ""
     }
 }

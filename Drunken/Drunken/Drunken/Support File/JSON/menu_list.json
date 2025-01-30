@@ -4,22 +4,26 @@
         {
             "id": 0,
             "game": "doraemon",
-            "gameName": "Doraemon Card"
+            "gameName": "Doraemon Card",
+            "type": "game"
         },
         {
             "id": 1,
             "game": "bottleSpin",
-            "gameName": "Bottle Spin"
+            "gameName": "Bottle Spin",
+            "type": "game"
         },
         {
             "id": 2,
             "game": "setting",
-            "gameName": "Setting"
+            "gameName": "Setting",
+            "type": "menu"
         },
         {
             "id": 3,
-            "game": "info",
-            "gameName": "Info"
+            "game": "about",
+            "gameName": "About",
+            "type": "menu"
         }
     ]
 }
