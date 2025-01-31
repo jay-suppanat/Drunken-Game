@@ -53,12 +53,12 @@ enum Constants {
     }
 
     enum DicePunishment {
-        static let dice7 = "คนทางซ้ายดื่ม"
-        static let dice8 = "คนทางขวาดื่ม"
-        static let dice9 = "คนทอยลูกเต๋าดื่ม"
-        static let dice2 = "คนทอยลูกเต๋าดื่ม"
-        static let dice12 = "ดื่มรอบวง"
-        static let doubleDice = "สั่งใครกินก็ได้"
+        static let dice7 = "dice7Punishment"
+        static let dice8 = "dice8Punishment"
+        static let dice9 = "dice9Punishment"
+        static let dice2 = "dice2Punishment"
+        static let dice12 = "dice12Punishment"
+        static let doubleDice = "doubleDicePunishment"
     }
 
     enum Command {

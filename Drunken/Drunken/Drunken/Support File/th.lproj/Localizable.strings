@@ -5,3 +5,13 @@
   Created by Suppanat Chinthumrucks on 31/1/2568 BE.
   
 */
+
+
+// MARK: Dice Roll Punishment
+
+"dice7Punishment" = "คนทางซ้ายดื่ม";
+"dice8Punishment" = "คนทางขวาดื่ม";
+"dice9Punishment" = "คนทอยลูกเต๋าดื่ม";
+"dice2Punishment" = "คนทอยลูกเต๋าดื่ม";
+"dice12Punishment" = "ดื่มรอบวง";
+"doubleDicePunishment" = "สั่งใครกินก็ได้";

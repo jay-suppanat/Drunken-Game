@@ -181,19 +181,19 @@ class DrunkenUtil: AppUtil {
         let sumDice = diceOne + diceTwo
 
         if diceOne == diceTwo && diceOne > 1 && diceTwo > 1 {
-            return Constants.DicePunishment.doubleDice
+            return Constants.DicePunishment.doubleDice.localized()
         } else {
             switch sumDice {
             case 2:
-                return Constants.DicePunishment.dice2
+                return Constants.DicePunishment.dice2.localized()
             case 7:
-                return Constants.DicePunishment.dice7
+                return Constants.DicePunishment.dice7.localized()
             case 8:
-                return Constants.DicePunishment.dice8
+                return Constants.DicePunishment.dice8.localized()
             case 9:
-                return Constants.DicePunishment.dice9
+                return Constants.DicePunishment.dice9.localized()
             case 12:
-                return Constants.DicePunishment.dice12
+                return Constants.DicePunishment.dice12.localized()
             default:
                 return Constants.Text.noAction
             }

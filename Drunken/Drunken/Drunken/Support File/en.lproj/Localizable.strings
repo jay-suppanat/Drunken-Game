@@ -5,3 +5,12 @@
   Created by Suppanat Chinthumrucks on 31/1/2568 BE.
   
 */
+
+// MARK: Dice Roll Punishment
+
+"dice7Punishment" = "The person on the left drinks";
+"dice8Punishment" = "The person on the right drinks";
+"dice9Punishment" = "The dice roller drinks";
+"dice2Punishment" = "The dice roller drinks";
+"dice12Punishment" = "Everyone drinks, Cheer";
+"doubleDicePunishment" = "You can order anyone to drink";
