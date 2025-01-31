@@ -21,6 +21,12 @@
         },
         {
             "id": 3,
+            "game": "setting",
+            "gameName": "Setting",
+            "type": "menu"
+        },
+        {
+            "id": 4,
             "game": "about",
             "gameName": "About",
             "type": "menu"
