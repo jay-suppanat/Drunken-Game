@@ -2,11 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>NotoSansThai-Regular.ttf</string>
-		<string>Lazydog.ttf</string>
-	</array>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-7435998187268451~1533362533</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -178,10 +177,11 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
-	<key>GADIsAdManagerApp</key>
-	<true/>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-7435998187268451~1533362533</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansThai-Regular.ttf</string>
+		<string>Lazydog.ttf</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 </dict>
