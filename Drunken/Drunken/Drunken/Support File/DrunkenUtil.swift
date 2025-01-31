@@ -28,7 +28,7 @@ class DrunkenUtil: AppUtil {
             suit = "♠️"
         default:
             numb = ""
-            suit = "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+            suit = Constants.Alert.errorAlert
         }
 
         return numb + suit
@@ -56,7 +56,7 @@ class DrunkenUtil: AppUtil {
         case 4:
             return "♠️"
         default:
-            return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+            return Constants.Alert.errorAlert
         }
     }
 
@@ -91,7 +91,7 @@ class DrunkenUtil: AppUtil {
         case let str where str.contains("A"):
             return UserDefaultManager.shared.getCommandAce()
         default:
-            return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+            return Constants.Alert.errorAlert
         }
     }
 
@@ -124,13 +124,11 @@ class DrunkenUtil: AppUtil {
         case let str where str.contains("A"):
             return Constants.Command.commandA
         default:
-            return "[Fuckkkkkkkkkkkkkk, My app have bug.]"
+            return Constants.Alert.errorAlert
         }
     }
 
     public func setPunishment(card: String, newCommand: String) {
-        print("Set Punishment")
-
         switch card {
         case let str where str.contains("2"):
             UserDefaultManager.shared.setCommand2(command: newCommand)
@@ -159,13 +157,11 @@ class DrunkenUtil: AppUtil {
         case let str where str.contains("A"):
             UserDefaultManager.shared.setCommandAce(command: newCommand)
         default:
-            print("[Fuckkkkkkkkkkkkkk, My app have bug.]")
+            print(Constants.Alert.errorAlert)
         }
     }
 
     public func resetPunishment() {
-        print("Reset Punishment")
-
         UserDefaultManager.shared.setCommand2(command: Constants.Command.command2)
         UserDefaultManager.shared.setCommand3(command: Constants.Command.command3)
         UserDefaultManager.shared.setCommand4(command: Constants.Command.command4)
