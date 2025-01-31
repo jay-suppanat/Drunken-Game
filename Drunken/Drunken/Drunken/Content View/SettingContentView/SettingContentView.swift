@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct SettingContentView: View {
+    @StateObject public var viewModel: SettingViewModel
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Setting")
     }
 }
 
 #Preview {
-    SettingContentView()
+    SettingContentView(viewModel: SettingViewModel())
 }
