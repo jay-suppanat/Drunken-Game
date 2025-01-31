@@ -4,7 +4,8 @@
         {
             "id": 0,
             "menu": "change_lang",
-            "menuName": "Language"
+            "menuName": "Language",
+            "type": "switch"
         }
     ]
 }

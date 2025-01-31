@@ -26,12 +26,19 @@ class UserDefaultManager {
     private let commandAceKey = "COMMAND_ACE_KEY"
     private let defaultLanguageKey = "DEFAULT_LANGUAGE_KEY"
 
+    private static var bundle: Bundle?
+
     private init() {}
 
     // MARK: Get-Set Default Language
 
     public func setDefaultLanguage(lang: String) {
-        UserDefaults.standard.set(lang, forKey: self.defaultLanguageKey)
+        if let path = Bundle.main.path(forResource: lang, ofType: "lproj") {
+            UserDefaultManager.bundle = Bundle(path: path)
+            UserDefaults.standard.set(UserDefaultManager.bundle?.localizedString(forKey: lang, value: nil, table: nil), forKey: self.defaultLanguageKey)
+        } else {
+            UserDefaults.standard.set(Constants.Lang.en, forKey: self.defaultLanguageKey)
+        }
     }
 
     public func getDefaultLanguage() -> String {

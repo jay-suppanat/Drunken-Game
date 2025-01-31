@@ -11,7 +11,15 @@ struct SettingContentView: View {
     @StateObject public var viewModel: SettingViewModel
 
     var body: some View {
-        Text("Setting")
+        ZStack {
+            AnimationBackgroundContentView(viewModel: AnimationBackgroundViewModel(gredient: [Color.blackColor]))
+
+            VStack {
+                ForEach(0..<self.viewModel.getSettingMenuListCount(), id: \.self) { index in
+                    // Cell
+                }
+            }
+        }
     }
 }
 

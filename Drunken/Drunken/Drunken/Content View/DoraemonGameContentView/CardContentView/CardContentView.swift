@@ -17,9 +17,8 @@ struct CardContentView: View {
                     .fill(Color.frontCardColor)
 
                 switch self.viewModel.getCardSide() {
-                case .front:
+                case .front: // MARK: Front Card
                     VStack {
-                        // MARK: Card Number
                         HStack {
                             Text(self.viewModel.getCard().first?.description ?? "")
                                 .font(.lazyDog80)
@@ -31,13 +30,11 @@ struct CardContentView: View {
 
                         Spacer()
 
-                        // MARK: Card Suit
                         Text(DrunkenUtil().getCardSuit(card: self.viewModel.getCard()))
                             .font(.lazyDog80)
 
                         Spacer()
 
-                        // MARK: Card Number
                         HStack {
                             Spacer()
 
@@ -48,7 +45,7 @@ struct CardContentView: View {
                         .frame(alignment: .bottomTrailing)
                     }
                     .padding(.horizontal, 15)
-                case .back:
+                case .back: // MARK: Back Card
                     RoundedRectangle(cornerRadius: 14)
                         .fill(Color.redColor)
                         .padding(30)

@@ -26,6 +26,7 @@ enum Constants {
         static let alert = "Alert"
         static let pressToRoll = "Press to roll dice."
         static let noAction = "Nothing to do."
+        static let setting = "Setting"
     }
 
     enum Alert {
