@@ -6,10 +6,13 @@
 //
 
 enum APIRouter: Routers {
+    case settingList
     case menuList
 
     var jsonFile: String {
         switch self {
+        case .settingList:
+            return "setting_list.json"
         case .menuList:
             return "menu_list.json"
         }

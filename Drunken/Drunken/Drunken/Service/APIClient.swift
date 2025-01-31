@@ -39,4 +39,8 @@ enum DrunkenService {
     static func fetchGameList() {
         UserDefaultManager.shared.setGameList(list: APIClient.shared.fetchDataFromJSON(fileName: APIRouter.menuList.jsonFile, response: GameListModel.self))
     }
+
+    static func fetchSettingMenuList(completion: @escaping (SettingMenuListModel) -> Void) {
+        completion(APIClient.shared.fetchDataFromJSON(fileName: APIRouter.settingList.jsonFile, response: SettingMenuListModel.self))
+    }
 }

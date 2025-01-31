@@ -21,11 +21,11 @@ struct SettingMenuListModel: Identifiable, Codable {
 // MARK: - List
 struct SettingMenuElement: Identifiable, Codable {
     let id: Int
-    let title, image: String
+    let menu, menuName: String
 
     init() {
         self.id = 0
-        self.title = ""
-        self.image = ""
+        self.menu = ""
+        self.menuName = ""
     }
 }
