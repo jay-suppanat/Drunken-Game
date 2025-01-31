@@ -26,6 +26,10 @@ enum Constants {
         static let alert = "Alert"
     }
 
+    enum Alert {
+        static let errorAlert = "Opps, something wrong!"
+    }
+
     enum CardDeck {
         static let cards = [
             "2", "22", "222", "2222",
