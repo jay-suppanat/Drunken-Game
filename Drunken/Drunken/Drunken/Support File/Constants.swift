@@ -24,6 +24,8 @@ enum Constants {
         static let restartGameAlert = "Would you like to restart the game?"
         static let gameEnd = "Game End"
         static let alert = "Alert"
+        static let pressToRoll = "Press to roll dice."
+        static let noAction = "Nothing to do."
     }
 
     enum Alert {
@@ -50,20 +52,29 @@ enum Constants {
         static let kingCards = ["K", "KK", "KKK", "KKKK"]
     }
 
+    enum DicePunishment {
+        static let dice7 = "คนทางซ้ายดื่ม"
+        static let dice8 = "คนทางขวาดื่ม"
+        static let dice9 = "คนทอยลูกเต๋าดื่ม"
+        static let dice2 = "คนทอยลูกเต๋าดื่ม"
+        static let dice12 = "ดื่มรอบวง"
+        static let doubleDice = "สั่งใครกินก็ได้"
+    }
+
     enum Command {
-      static let command2 = "กินครึ่งแก้ว"
-      static let command3 = "คนทางซ้ายกิน"
-      static let command4 = "คนทางขวากิน"
-      static let command5 = "เลือกใครเป็นบัดดี้ก็ได้\nหรือ\nยกเลิกการเป็นบัดดี้"
-      static let command6 = "เลือกหมวดหมู่มา 1 หมวด\nใครตอบผิด ตอบซ้ำ\nตอบไม่ได้ กินหมดแก้ว"
-      static let command7 = "เลือกตัวเลขมา 1 ตัว\nห้ามพูดเลขที่มีเลขที่เลือก\nหรือหารด้วยตัวเลขที่เลือกลงตัว"
-      static let command8 = "เก็บการ์ดนี้ไว้\nเมื่อใช้จะสามารถไปเข้าห้องน้ำได้\nใช้ตอนไหนก็ได้"
-      static let command9 = "ทำท่าจับคางตอนไหนก็ได้\nแล้วให้คนอื่นทำตาม\nใครทำคนสุดท้าย กินหมดแก้ว"
-      static let command10 = "สร้างคำขึ้นมา 1 คำ ห้ามพูดคำนี้\nจนกว่าเกมจะจบ"
-      static let commandJ = "เลือกใบ้ใครก็ได้ 1 คน\n(จะยกเลิกเมื่อมีคนคุยด้วย)"
-      static let commandQ = "สั่งใครกินก็ได้"
-      static let commandK = "K ใบแรก: สั่งว่าให้ทำไร\nK ใบสอง: จำนวนเท่าไร\nK ใบสาม: ทำที่ไหน\nK ใบสี่: ให้ใครทำ"
-      static let commandA = "กินหมดแก้ว"
+      static let command2 = "คนสุ่มดื่มครึ่งแก้ว"
+      static let command3 = "คนทางซ้ายดื่ม"
+      static let command4 = "คนทางขวาดื่ม"
+      static let command5 = "จับคู่ใครก็ได้เป็นบัดดี้กัน\nถ้าใครโดน อีกคนโดนด้วย\nหรือ คนสุ่มยกเลิกบัดดี้ของตัวเอง"
+      static let command6 = "เลือกหมวดหมู่มา 1 หมวด\nใครตอบผิด ตอบซ้ำ ตอบไม่ได้ ดื่ม"
+      static let command7 = "เลือกตัวเลขมา 1 ตัว\nห้ามพูดเลขที่มีเลขที่เลือก\nหรือหารด้วยตัวเลขที่เลือกลงตัว\nใครตอบผิดดื่ม"
+      static let command8 = "เก็บการ์ดนี้ไว้\nเมื่อใช้คนใช้จะสามารถไปเข้าห้องน้ำได้\nใช้ตอนไหนก็ได้"
+      static let command9 = "ทำท่าจับคางตอนไหนก็ได้\nแล้วให้คนอื่นทำตาม\nใครทำคนสุดท้ายดื่ม"
+      static let command10 = "สร้างคำขึ้นมา 1 คำ ห้ามพูดคำนี้\nจนกว่าเกมจะจบ\nใครพูดคนนั้นดื่ม"
+      static let commandJ = "เลือกใบ้ใครก็ได้ 1 คน\nใครคุยด้วย คนนั้นต้องดื่ม\n(จะยกเลิกเมื่อมีคนคุยด้วย)"
+      static let commandQ = "สั่งใครดื่มก็ได้"
+      static let commandK = "K ใบแรก: สั่งว่าให้ทำไร\nK ใบสอง: จำนวนเท่าไร\nK ใบสาม: ทำที่ไหน\nK ใบสี่: คนสุ่มโดนทำโทษ"
+      static let commandA = "คนสุ่มดื่มหมดแก้ว"
 
       static let commandArray = [
         UserDefaultManager.shared.getCommand2(),

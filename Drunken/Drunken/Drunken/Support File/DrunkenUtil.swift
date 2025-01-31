@@ -176,4 +176,27 @@ class DrunkenUtil: AppUtil {
         UserDefaultManager.shared.setCommandKing(command: Constants.Command.commandK)
         UserDefaultManager.shared.setCommandAce(command: Constants.Command.commandA)
     }
+
+    public func getDiceRollPunishment(diceOne: Int, diceTwo: Int) -> String {
+        let sumDice = diceOne + diceTwo
+
+        if diceOne == diceTwo && diceOne > 1 && diceTwo > 1 {
+            return Constants.DicePunishment.doubleDice
+        } else {
+            switch sumDice {
+            case 2:
+                return Constants.DicePunishment.dice2
+            case 7:
+                return Constants.DicePunishment.dice7
+            case 8:
+                return Constants.DicePunishment.dice8
+            case 9:
+                return Constants.DicePunishment.dice9
+            case 12:
+                return Constants.DicePunishment.dice12
+            default:
+                return Constants.Text.noAction
+            }
+        }
+    }
 }
