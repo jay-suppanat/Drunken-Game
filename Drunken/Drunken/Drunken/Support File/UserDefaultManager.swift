@@ -24,8 +24,20 @@ class UserDefaultManager {
     private let commandQueenKey = "COMMAND_QUEEN_KEY"
     private let commandKingKey = "COMMAND_KING_KEY"
     private let commandAceKey = "COMMAND_ACE_KEY"
+    private let defaultLanguageKey = "DEFAULT_LANGUAGE_KEY"
 
     private init() {}
+
+    // MARK: Get-Set Default Language
+
+    public func setDefaultLanguage(lang: String) {
+        UserDefaults.standard.set(lang, forKey: self.defaultLanguageKey)
+    }
+
+    public func getDefaultLanguage() -> String {
+        return UserDefaults.standard.object(forKey: self.defaultLanguageKey) as? String ?? Constants.Lang.en
+    }
+
 
     // MARK: Get-Set Game List
 

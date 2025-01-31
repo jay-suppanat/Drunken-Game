@@ -109,5 +109,10 @@ enum Constants {
         ]
     }
 
+    enum Lang {
+        static let en = "en"
+        static let th = "th"
+    }
+
     static var aboutText = "Welcome to Drunken!, the ultimate party game for friends who love a little chaos with their drinks! Whether you’re sipping cocktails, chugging beer, or savoring mocktails, this game brings laughter, challenges, and unforgettable moments.\n\nGather your crew, raise your glasses, and get ready for wild dares, tricky trivia, and surprising twists. But remember:\n •    Play responsibly.\n •    Know your limits.\n •    And most importantly, have a blast!\n\nLet the drinks flow, the laughter roll, and may the best player remain standing (or at least upright)! Cheers! 🥂🎮"
 }
